@@ -18,10 +18,12 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 public class ResourceReadText extends ResourceReadComponent implements ProcessorSync {
 
     @Property("Resource file")
+    @PropertyInfo("The path and name of the file to be read from the project's resources folder.")
     private ResourceText resourceFile;
 
     @Property("Auto mime type")
     @Default("true")
+    @PropertyInfo("If true, the mime type of the payload is determined from the extension of the resource read.")
     private boolean autoMimeType;
 
     @Property("Mime type")
@@ -29,6 +31,7 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
     @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
+    @PropertyInfo("The mime type of the resource read from local project's resources directory.")
     private String mimeType;
 
     @Override

@@ -31,10 +31,13 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
     private ResourceService resourceService;
 
     @Property("Resource file")
+    @PropertyInfo("The path and name of the file to be read from the project's resources folder. " +
+            "The value which might be static or a dynamic expression must point to a file existing in the project's resources directory, e.g: <i>/assets/my_text.txt</i>")
     private DynamicResource resourceFile;
 
     @Property("Auto mime type")
     @Default("true")
+    @PropertyInfo("If true, the mime type of the payload is determined from the extension of the resource read.")
     private boolean autoMimeType;
 
     @Property("Mime type")
@@ -42,6 +45,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
     @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
+    @PropertyInfo("The mime type of the resource read from local project's resources directory.")
     private String mimeType;
 
     @Property("Configuration")

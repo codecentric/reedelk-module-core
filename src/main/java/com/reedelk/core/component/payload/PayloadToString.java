@@ -1,9 +1,6 @@
 package com.reedelk.core.component.payload;
 
-import com.reedelk.runtime.api.annotation.Default;
-import com.reedelk.runtime.api.annotation.ESBComponent;
-import com.reedelk.runtime.api.annotation.MimeTypeCombo;
-import com.reedelk.runtime.api.annotation.Property;
+import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.message.FlowContext;
@@ -28,6 +25,7 @@ public class PayloadToString implements ProcessorSync {
     @MimeTypeCombo
     @Property("Mime type")
     @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @PropertyInfo("Sets the new mime type of the payload content.")
     private String mimeType;
 
     private MimeType wantedMimeType;

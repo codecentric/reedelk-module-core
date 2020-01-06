@@ -11,6 +11,7 @@
           "displayName": "Name",
           "propertyName": "name",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The name of the variable to be removed from the flow context.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -32,6 +33,7 @@
           "displayName": "Name",
           "propertyName": "name",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The name of the variable to be set in the flow context.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -44,6 +46,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "*/*",
+          "propertyInfo": "The mime type of the value this context variable will be bound to.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -180,6 +183,7 @@
           "displayName": "Value",
           "propertyName": "value",
           "defaultValue": "#[]",
+          "propertyInfo": "The value to assign to the context variable being set. It might be a static or dynamic value.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -200,6 +204,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
+          "propertyInfo": "Sets the mime type of the joined content in the message.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -335,6 +340,7 @@
           "displayName": "Delimiter",
           "propertyName": "delimiter",
           "defaultValue": ",",
+          "propertyInfo": "The delimiter char (or string) to be used to join the content of the messages.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -355,6 +361,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
+          "propertyInfo": "Sets the mime type of the joined content in the message.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -525,6 +532,7 @@
           "displayName": "Logger Level",
           "propertyName": "level",
           "defaultValue": "INFO",
+          "propertyInfo": "The logger level used to log the given message. Log levels can be configured from the \u003ci\u003e{RUNTIME_HOME}/config/logback.xml\u003c/i\u003e file.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeEnumDescriptor",
             "instance": {
@@ -545,7 +553,7 @@
           "displayName": "Log message",
           "propertyName": "message",
           "defaultValue": "#[message]",
-          "propertyInfo": "Sets the message to be logged. It could be a static or dynamic value.",
+          "propertyInfo": "Sets the message to be logged. It can be a static or dynamic value.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -721,6 +729,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
+          "propertyInfo": "Sets the new mime type of the payload content.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -864,6 +873,7 @@
           "displayName": "Resource file",
           "propertyName": "resourceFile",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The path and name of the file to be read from the project\u0027s resources folder.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeResourceBinaryDescriptor",
             "instance": {
@@ -876,6 +886,7 @@
           "displayName": "Auto mime type",
           "propertyName": "autoMimeType",
           "defaultValue": "true",
+          "propertyInfo": "If true, the mime type of the payload is determined from the extension of the resource read.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -888,6 +899,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
+          "propertyInfo": "The mime type of the resource read from local project\u0027s resources directory.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -1040,6 +1052,7 @@
           "displayName": "Resource file",
           "propertyName": "resourceFile",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The path and name of the file to be read from the project\u0027s resources folder. The value which might be static or a dynamic expression must point to a file existing in the project\u0027s resources directory, e.g: \u003ci\u003e/assets/my_text.txt\u003c/i\u003e",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -1052,6 +1065,7 @@
           "displayName": "Auto mime type",
           "propertyName": "autoMimeType",
           "defaultValue": "true",
+          "propertyInfo": "If true, the mime type of the payload is determined from the extension of the resource read.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -1064,6 +1078,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
+          "propertyInfo": "The mime type of the resource read from local project\u0027s resources directory.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -1246,6 +1261,7 @@
           "displayName": "Resource file",
           "propertyName": "resourceFile",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The path and name of the file to be read from the project\u0027s resources folder.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeResourceTextDescriptor",
             "instance": {
@@ -1258,6 +1274,7 @@
           "displayName": "Auto mime type",
           "propertyName": "autoMimeType",
           "defaultValue": "true",
+          "propertyInfo": "If true, the mime type of the payload is determined from the extension of the resource read.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
@@ -1270,6 +1287,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
+          "propertyInfo": "The mime type of the resource read from local project\u0027s resources directory.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {

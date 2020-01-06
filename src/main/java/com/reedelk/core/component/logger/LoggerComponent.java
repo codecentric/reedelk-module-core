@@ -27,12 +27,14 @@ public class LoggerComponent implements ProcessorSync {
 
     @Property("Logger Level")
     @Default("INFO")
+    @PropertyInfo("The logger level used to log the given message. " +
+            "Log levels can be configured from the <i>{RUNTIME_HOME}/config/logback.xml</i> file.")
     private LoggerLevel level;
 
     @Default("#[message]")
     @Hint("my log message")
     @Property("Log message")
-    @PropertyInfo("Sets the message to be logged. It could be a static or dynamic value.")
+    @PropertyInfo("Sets the message to be logged. It can be a static or dynamic value.")
     private DynamicObject message;
 
     @Override

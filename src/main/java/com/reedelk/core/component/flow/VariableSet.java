@@ -25,16 +25,19 @@ public class VariableSet implements ProcessorSync {
 
     @Property("Name")
     @Hint("myVariable")
+    @PropertyInfo("The name of the variable to be set in the flow context.")
     private String name;
 
     @Property("Mime type")
     @Default(MimeType.MIME_TYPE_ANY)
     @MimeTypeCombo
+    @PropertyInfo("The mime type of the value this context variable will be bound to.")
     private String mimeType;
 
     @Property("Value")
     @Default("#[]")
     @Hint("variable text value")
+    @PropertyInfo("The value to assign to the context variable being set. It might be a static or dynamic value.")
     private DynamicObject value;
 
     @Override

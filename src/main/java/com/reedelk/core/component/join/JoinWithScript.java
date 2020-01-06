@@ -28,6 +28,7 @@ public class JoinWithScript implements Join {
     @Property("Mime type")
     @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
     @MimeTypeCombo
+    @PropertyInfo("Sets the mime type of the joined content in the message.")
     private String mimeType;
 
 

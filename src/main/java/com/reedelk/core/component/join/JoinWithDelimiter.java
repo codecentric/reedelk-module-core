@@ -1,9 +1,6 @@
 package com.reedelk.core.component.join;
 
-import com.reedelk.runtime.api.annotation.Default;
-import com.reedelk.runtime.api.annotation.ESBComponent;
-import com.reedelk.runtime.api.annotation.MimeTypeCombo;
-import com.reedelk.runtime.api.annotation.Property;
+import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.Join;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.message.FlowContext;
@@ -30,9 +27,11 @@ public class JoinWithDelimiter implements Join {
     @Property("Mime type")
     @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
     @MimeTypeCombo
+    @PropertyInfo("Sets the mime type of the joined content in the message.")
     private String mimeType;
 
     @Property("Delimiter")
+    @PropertyInfo("The delimiter char (or string) to be used to join the content of the messages.")
     @Default(",")
     private String delimiter;
 

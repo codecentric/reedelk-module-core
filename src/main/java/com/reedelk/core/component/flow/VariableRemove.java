@@ -3,6 +3,7 @@ package com.reedelk.core.component.flow;
 import com.reedelk.runtime.api.annotation.ESBComponent;
 import com.reedelk.runtime.api.annotation.Hint;
 import com.reedelk.runtime.api.annotation.Property;
+import com.reedelk.runtime.api.annotation.PropertyInfo;
 import com.reedelk.runtime.api.commons.StringUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.message.FlowContext;
@@ -17,6 +18,7 @@ public class VariableRemove implements ProcessorSync {
 
     @Property("Name")
     @Hint("variable name")
+    @PropertyInfo("The name of the variable to be removed from the flow context.")
     private String name;
 
     @Override
