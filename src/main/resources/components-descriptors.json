@@ -545,6 +545,7 @@
           "displayName": "Log message",
           "propertyName": "message",
           "defaultValue": "#[message]",
+          "propertyInfo": "Sets the message to be logged. It could be a static or dynamic value.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -1421,6 +1422,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
+          "propertyInfo": "Sets the mime type of the script result in the message payload. E.g: if the result of the script is JSON, then \u003ci\u003eapplication/json\u003c/i\u003e should be selected.This is useful to let the following components know how to process the message payload set by this script. The rest listener for instance uses this information to set the correct content type in the request\u0027s response body.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -1556,6 +1558,7 @@
           "displayName": "Script",
           "propertyName": "script",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "Sets the script to be executed by this component.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeScriptDescriptor",
             "instance": {

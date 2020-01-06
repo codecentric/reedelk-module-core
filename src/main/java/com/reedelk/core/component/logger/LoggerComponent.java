@@ -1,9 +1,6 @@
 package com.reedelk.core.component.logger;
 
-import com.reedelk.runtime.api.annotation.Default;
-import com.reedelk.runtime.api.annotation.ESBComponent;
-import com.reedelk.runtime.api.annotation.Hint;
-import com.reedelk.runtime.api.annotation.Property;
+import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.exception.ESBException;
 import com.reedelk.runtime.api.message.FlowContext;
@@ -35,6 +32,7 @@ public class LoggerComponent implements ProcessorSync {
     @Default("#[message]")
     @Hint("my log message")
     @Property("Log message")
+    @PropertyInfo("Sets the message to be logged. It could be a static or dynamic value.")
     private DynamicObject message;
 
     @Override

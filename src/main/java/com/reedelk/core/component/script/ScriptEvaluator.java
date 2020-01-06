@@ -1,9 +1,6 @@
 package com.reedelk.core.component.script;
 
-import com.reedelk.runtime.api.annotation.Default;
-import com.reedelk.runtime.api.annotation.ESBComponent;
-import com.reedelk.runtime.api.annotation.MimeTypeCombo;
-import com.reedelk.runtime.api.annotation.Property;
+import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.message.FlowContext;
 import com.reedelk.runtime.api.message.Message;
@@ -28,9 +25,14 @@ public class ScriptEvaluator implements ProcessorSync {
     @Property("Mime type")
     @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
     @MimeTypeCombo
+    @PropertyInfo("Sets the mime type of the script result in the message payload. " +
+            "E.g: if the result of the script is JSON, then <i>application/json</i> should be selected." +
+            "This is useful to let the following components know how to process the message payload set by this script. " +
+            "The rest listener for instance uses this information to set the correct content type in the request's response body.")
     private String mimeType;
 
     @Property("Script")
+    @PropertyInfo("Sets the script to be executed by this component.")
     private Script script;
 
     @Override
