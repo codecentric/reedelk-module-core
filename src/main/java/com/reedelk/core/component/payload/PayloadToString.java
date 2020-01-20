@@ -32,7 +32,7 @@ public class PayloadToString implements ProcessorSync {
 
     @Override
     public void initialize() {
-        requireNotBlank(mimeType, "MimeType must not be empty");
+        requireNotBlank(PayloadToString.class, mimeType, "MimeType must not be empty");
         this.wantedMimeType = MimeType.parse(mimeType);
     }
 
