@@ -6,7 +6,7 @@ import com.reedelk.runtime.api.annotation.Property;
 import com.reedelk.runtime.api.annotation.PropertyInfo;
 import com.reedelk.runtime.api.commons.StringUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
-import com.reedelk.runtime.api.message.FlowContext;
+import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import org.osgi.service.component.annotations.Component;
 
