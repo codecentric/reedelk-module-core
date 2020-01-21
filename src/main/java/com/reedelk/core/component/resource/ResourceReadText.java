@@ -35,7 +35,7 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
     private String mimeType;
 
     @Override
-    public Message apply(Message message, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, Message message) {
 
         Publisher<String> data = resourceFile.data();
 

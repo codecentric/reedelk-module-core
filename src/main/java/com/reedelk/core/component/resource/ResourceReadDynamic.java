@@ -54,7 +54,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
     private int readBufferSize;
 
     @Override
-    public Message apply(Message message, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, Message message) {
 
         try {
 

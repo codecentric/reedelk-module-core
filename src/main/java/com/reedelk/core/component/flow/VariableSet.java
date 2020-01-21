@@ -41,7 +41,7 @@ public class VariableSet implements ProcessorSync {
     private DynamicObject value;
 
     @Override
-    public Message apply(Message message, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, Message message) {
         if (StringUtils.isBlank(name)) {
             throw new ESBException("Variable name must not be empty");
         }

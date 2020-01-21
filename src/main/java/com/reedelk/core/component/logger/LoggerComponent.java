@@ -38,7 +38,7 @@ public class LoggerComponent implements ProcessorSync {
     private DynamicObject message;
 
     @Override
-    public Message apply(Message message, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, Message message) {
         try {
             if (LoggerLevel.DEBUG.equals(level)) {
                 // When level is DEBUG, we only debug if the debug is enabled.

@@ -36,7 +36,7 @@ public class ScriptEvaluator implements ProcessorSync {
     private Script script;
 
     @Override
-    public Message apply(Message message, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, Message message) {
 
         MimeType mimeType = MimeType.parse(this.mimeType);
 

@@ -40,7 +40,7 @@ public class JoinWithScript implements Join {
     private Script script;
 
     @Override
-    public Message apply(List<Message> messagesToJoin, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {
 
         Optional<Object> result = service.evaluate(script, Object.class, flowContext, messagesToJoin);
         if (result.isPresent()) {

@@ -35,7 +35,7 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
     private String mimeType;
 
     @Override
-    public Message apply(Message message, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, Message message) {
 
         Publisher<byte[]> data = resourceFile.data();
 

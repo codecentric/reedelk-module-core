@@ -36,7 +36,7 @@ public class JoinWithDelimiter implements Join {
     private String delimiter;
 
     @Override
-    public Message apply(List<Message> messagesToJoin, FlowContext flowContext) {
+    public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {
 
         // Join with delimiter supports joins of only string data types.
         String combinedPayload = messagesToJoin.stream()
