@@ -7,8 +7,6 @@ import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
-import com.reedelk.runtime.api.message.content.TypedContent;
-import com.reedelk.runtime.api.message.content.factory.TypedContentFactory;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -43,10 +41,8 @@ public class PayloadToString implements ProcessorSync {
 
         String converted = converterService.convert(payload, String.class);
 
-        TypedContent<?> typedContent = TypedContentFactory.from(converted, wantedMimeType);
-
         return MessageBuilder.get()
-                .typedContent(typedContent)
+                .withString(converted, wantedMimeType)
                 .attributes(message.attributes())
                 .build();
     }

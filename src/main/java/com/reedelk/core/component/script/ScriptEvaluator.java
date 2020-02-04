@@ -6,8 +6,6 @@ import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
-import com.reedelk.runtime.api.message.content.TypedContent;
-import com.reedelk.runtime.api.message.content.factory.TypedContentFactory;
 import com.reedelk.runtime.api.script.Script;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import org.osgi.service.component.annotations.Component;
@@ -42,9 +40,9 @@ public class ScriptEvaluator implements ProcessorSync {
 
         Object evaluated = service.evaluate(script, Object.class, flowContext, message).orElse(null);
 
-        TypedContent<?> content = TypedContentFactory.from(evaluated, mimeType);
-
-        return MessageBuilder.get().typedContent(content).build();
+        return MessageBuilder.get()
+                .withJavaObject(evaluated, mimeType)
+                .build();
     }
 
     public void setScript(Script script) {

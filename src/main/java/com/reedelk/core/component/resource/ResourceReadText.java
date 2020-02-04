@@ -41,14 +41,13 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
 
         String resourceFilePath = resourceFile.path();
 
-        MessageAttributes attributes = createAttributes(ResourceReadText.class, resourceFilePath);
-
         MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath);
+
+        MessageAttributes attributes = createAttributes(ResourceReadText.class, resourceFilePath);
 
         return MessageBuilder.get()
                 .attributes(attributes)
-                .withText(data)
-                .mimeType(mimeType)
+                .withString(data, mimeType)
                 .build();
     }
 

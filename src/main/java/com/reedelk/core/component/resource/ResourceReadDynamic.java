@@ -7,9 +7,7 @@ import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
-import com.reedelk.runtime.api.message.content.ByteArrayContent;
 import com.reedelk.runtime.api.message.content.MimeType;
-import com.reedelk.runtime.api.message.content.TypedContent;
 import com.reedelk.runtime.api.resource.DynamicResource;
 import com.reedelk.runtime.api.resource.ResourceFile;
 import com.reedelk.runtime.api.resource.ResourceNotFound;
@@ -62,15 +60,16 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
 
             String resourceFilePath = resourceFile.path();
 
-            MimeType actualMimeType = mimeTypeFrom(autoMimeType, mimeType, resourceFilePath);
-
             Publisher<byte[]> dataStream = resourceFile.data();
 
-            TypedContent<byte[]> content = new ByteArrayContent(dataStream, actualMimeType);
+            MimeType actualMimeType = mimeTypeFrom(autoMimeType, mimeType, resourceFilePath);
 
             MessageAttributes attributes = createAttributes(ResourceReadDynamic.class, resourceFilePath);
 
-            return MessageBuilder.get().attributes(attributes).typedContent(content).build();
+            return MessageBuilder.get()
+                    .withBinary(dataStream, actualMimeType)
+                    .attributes(attributes)
+                    .build();
 
         } catch (ResourceNotFound resourceNotFound) {
             throw new ESBException(resourceNotFound);
@@ -101,5 +100,4 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
     public void setConfiguration(ResourceReadDynamicConfiguration configuration) {
         this.configuration = configuration;
     }
-
 }

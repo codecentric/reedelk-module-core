@@ -7,8 +7,6 @@ import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
-import com.reedelk.runtime.api.message.content.TypedContent;
-import com.reedelk.runtime.api.message.content.factory.TypedContentFactory;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -48,9 +46,9 @@ public class JoinWithDelimiter implements Join {
 
         MimeType mimeType = MimeType.parse(this.mimeType);
 
-        TypedContent<?> typedContent = TypedContentFactory.from(combinedPayload, mimeType);
-
-        return MessageBuilder.get().typedContent(typedContent).build();
+        return MessageBuilder.get()
+                .withString(combinedPayload, mimeType)
+                .build();
     }
 
     public void setDelimiter(String delimiter) {

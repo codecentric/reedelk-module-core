@@ -9,8 +9,6 @@ import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
-import com.reedelk.runtime.api.message.content.TypedContent;
-import com.reedelk.runtime.api.message.content.factory.TypedContentFactory;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import com.reedelk.runtime.api.script.dynamicvalue.DynamicObject;
 import org.osgi.service.component.annotations.Component;
@@ -41,9 +39,10 @@ public class PayloadSet implements ProcessorSync {
 
         Object result = scriptEngine.evaluate(payload, mimeType, flowContext, message).orElse(null);
 
-        TypedContent<?> content = TypedContentFactory.from(result, mimeType);
-
-        return MessageBuilder.get().attributes(message.getAttributes()).typedContent(content).build();
+        return MessageBuilder.get()
+                .attributes(message.getAttributes())
+                .withJavaObject(result, mimeType)
+                .build();
     }
 
     public void setPayload(DynamicObject payload) {

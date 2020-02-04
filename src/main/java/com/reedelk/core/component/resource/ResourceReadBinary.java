@@ -47,8 +47,7 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
 
         return MessageBuilder.get()
                 .attributes(attributes)
-                .withBinary(data)
-                .mimeType(mimeType)
+                .withBinary(data, mimeType)
                 .build();
     }
 
