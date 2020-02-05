@@ -7,6 +7,8 @@ import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
+import com.reedelk.runtime.api.message.content.TypedContent;
+import com.reedelk.runtime.api.message.content.TypedPublisher;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -37,14 +39,24 @@ public class PayloadToString implements ProcessorSync {
     @Override
     public Message apply(FlowContext flowContext, Message message) {
 
-        Object payload = message.payload();
-
-        String converted = converterService.convert(payload, String.class);
-
-        return MessageBuilder.get()
-                .withString(converted, wantedMimeType)
-                .attributes(message.attributes())
-                .build();
+        TypedContent<?, ?> content = message.content();
+        if (content.isStream()) {
+            // Content is not consumed.
+            TypedPublisher<?> stream = content.stream();
+            TypedPublisher<String> output = converterService.convert(stream, String.class);
+            return MessageBuilder.get()
+                    .withTypedPublisher(output, wantedMimeType)
+                    .attributes(message.attributes())
+                    .build();
+        } else {
+            // Content is consumed.
+            Object data = content.data();
+            String converted = converterService.convert(data, String.class);
+            return MessageBuilder.get()
+                    .withString(converted, wantedMimeType)
+                    .attributes(message.attributes())
+                    .build();
+        }
     }
 
     public void setMimeType(String mimeType) {
