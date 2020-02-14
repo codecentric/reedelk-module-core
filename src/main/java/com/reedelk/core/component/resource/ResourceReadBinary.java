@@ -43,6 +43,7 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
 
         MessageAttributes attributes = createAttributes(ResourceReadText.class, resourceFilePath);
 
+        // TODO: Need to convert the payload form the mime type!
         MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath);
 
         return MessageBuilder.get()

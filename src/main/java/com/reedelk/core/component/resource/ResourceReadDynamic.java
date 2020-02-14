@@ -62,6 +62,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
 
             Publisher<byte[]> dataStream = resourceFile.data();
 
+            // TODO: Need to convert the payload from the mime type!
             MimeType actualMimeType = mimeTypeFrom(autoMimeType, mimeType, resourceFilePath);
 
             MessageAttributes attributes = createAttributes(ResourceReadDynamic.class, resourceFilePath);
