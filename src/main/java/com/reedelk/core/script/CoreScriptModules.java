@@ -12,9 +12,11 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 
 @AutoCompleteContributor(contributions = {
+
         "Util[VARIABLE:Util]",
         "Util.tmpdir()[FUNCTION:String]",
         "Util.uuid()[FUNCTION:String]",
+
         "Log[VARIABLE:Log]",
         "Log.info('')[FUNCTION:void:2]",
         "Log.debug('')[FUNCTION:void:2]",

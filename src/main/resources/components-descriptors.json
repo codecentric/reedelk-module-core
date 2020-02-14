@@ -1602,7 +1602,20 @@
         "Log.debug(\u0027\u0027)[FUNCTION:void:2]",
         "Log.warn(\u0027\u0027)[FUNCTION:void:2]",
         "Log.error(\u0027\u0027)[FUNCTION:void:2]",
-        "Log.trace(\u0027\u0027)[FUNCTION:void:2]"
+        "Log.trace(\u0027\u0027)[FUNCTION:void:2]",
+        "Config[VARIABLE:Config]",
+        "Config.getString(\u0027\u0027)[FUNCTION:String:2]",
+        "Config.getStringWithDefault(\u0027\u0027,\u0027\u0027)[FUNCTION:String:5]",
+        "Config.getInt(\u0027\u0027)[FUNCTION:String:2]",
+        "Config.getIntWithDefault(\u0027\u0027,5)[FUNCTION:String:3]",
+        "Config.getLong(\u0027\u0027)[FUNCTION:String:2]",
+        "Config.getLongWithDefault(\u0027\u0027,5)[FUNCTION:String:3]",
+        "Config.getDouble(\u0027\u0027)[FUNCTION:String:2]",
+        "Config.getDoubleWithDefault(\u0027\u0027,5)[FUNCTION:String:5]",
+        "Config.getFloat(\u0027\u0027)[FUNCTION:String:2]",
+        "Config.getFloatWithDefault(\u0027\u0027,5)[FUNCTION:String:5]",
+        "Config.getBoolean(\u0027\u0027)[FUNCTION:String:2]",
+        "Config.getBooleanWithDefault(\u0027\u0027,true)[FUNCTION:String:7]"
       ]
     }
   ]
