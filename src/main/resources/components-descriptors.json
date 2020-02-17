@@ -573,7 +573,7 @@
         {
           "displayName": "Mime type",
           "propertyName": "mimeType",
-          "defaultValue": "text/plain",
+          "defaultValue": "*/*",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
