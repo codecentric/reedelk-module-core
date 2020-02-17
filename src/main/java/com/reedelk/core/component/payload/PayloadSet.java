@@ -25,7 +25,7 @@ public class PayloadSet implements ProcessorSync {
 
     @MimeTypeCombo
     @Property("Mime type")
-    @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Default(MimeType.MIME_TYPE_ANY)
     private String mimeType;
 
     @Property("Payload")
