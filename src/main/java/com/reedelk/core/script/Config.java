@@ -1,4 +1,4 @@
-package com.reedelk.core.component.config;
+package com.reedelk.core.script;
 
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 

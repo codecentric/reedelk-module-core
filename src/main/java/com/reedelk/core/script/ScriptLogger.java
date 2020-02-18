@@ -1,4 +1,4 @@
-package com.reedelk.core.component.logger;
+package com.reedelk.core.script;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

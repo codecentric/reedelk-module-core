@@ -1,7 +1,5 @@
 package com.reedelk.core.script;
 
-import com.reedelk.core.component.config.Config;
-import com.reedelk.core.component.logger.ScriptLogger;
 import com.reedelk.runtime.api.annotation.AutoCompleteContributor;
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 import com.reedelk.runtime.api.script.ScriptSource;
