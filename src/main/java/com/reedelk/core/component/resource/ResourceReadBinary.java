@@ -1,14 +1,18 @@
 package com.reedelk.core.component.resource;
 
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.JavaType;
 import com.reedelk.runtime.api.component.ProcessorSync;
+import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
+import com.reedelk.runtime.api.message.content.TypedPublisher;
 import com.reedelk.runtime.api.resource.ResourceBinary;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.reactivestreams.Publisher;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
@@ -34,6 +38,9 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
     @PropertyInfo("The mime type of the resource read from local project's resources directory.")
     private String mimeType;
 
+    @Reference
+    ConverterService converterService;
+
     @Override
     public Message apply(FlowContext flowContext, Message message) {
 
@@ -43,13 +50,23 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
 
         MessageAttributes attributes = createAttributes(ResourceReadText.class, resourceFilePath);
 
-        // TODO: Need to convert the payload form the mime type!
         MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath);
 
-        return MessageBuilder.get()
-                .attributes(attributes)
-                .withBinary(data, mimeType)
-                .build();
+        // Convert the payload to a suitable type according to the mime type.
+        if (String.class == JavaType.from(mimeType)) {
+            TypedPublisher<String> streamAsString =
+                    converterService.convert(TypedPublisher.fromByteArray(data), String.class);
+
+            return MessageBuilder.get()
+                    .withString(streamAsString, mimeType)
+                    .attributes(attributes)
+                    .build();
+        } else {
+            return MessageBuilder.get()
+                    .withBinary(data, mimeType)
+                    .attributes(attributes)
+                    .build();
+        }
     }
 
     public void setResourceFile(ResourceBinary resourceFile) {

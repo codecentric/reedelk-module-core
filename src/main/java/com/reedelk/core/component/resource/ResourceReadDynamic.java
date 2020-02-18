@@ -1,13 +1,16 @@
 package com.reedelk.core.component.resource;
 
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.JavaType;
 import com.reedelk.runtime.api.component.ProcessorSync;
+import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.exception.ESBException;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
+import com.reedelk.runtime.api.message.content.TypedPublisher;
 import com.reedelk.runtime.api.resource.DynamicResource;
 import com.reedelk.runtime.api.resource.ResourceFile;
 import com.reedelk.runtime.api.resource.ResourceNotFound;
@@ -26,7 +29,9 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 public class ResourceReadDynamic extends ResourceReadComponent implements ProcessorSync {
 
     @Reference
-    private ResourceService resourceService;
+    ResourceService resourceService;
+    @Reference
+    ConverterService converterService;
 
     @Property("Resource file")
     @PropertyInfo("The path and name of the file to be read from the project's resources folder. " +
@@ -62,15 +67,25 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
 
             Publisher<byte[]> dataStream = resourceFile.data();
 
-            // TODO: Need to convert the payload from the mime type!
-            MimeType actualMimeType = mimeTypeFrom(autoMimeType, mimeType, resourceFilePath);
-
             MessageAttributes attributes = createAttributes(ResourceReadDynamic.class, resourceFilePath);
 
-            return MessageBuilder.get()
-                    .withBinary(dataStream, actualMimeType)
-                    .attributes(attributes)
-                    .build();
+            MimeType actualMimeType = mimeTypeFrom(autoMimeType, mimeType, resourceFilePath);
+
+            // Convert the payload to a suitable type according to the mime type.
+            if (String.class == JavaType.from(actualMimeType)) {
+                TypedPublisher<String> streamAsString =
+                        converterService.convert(TypedPublisher.fromByteArray(dataStream), String.class);
+
+                return MessageBuilder.get()
+                        .withString(streamAsString, actualMimeType)
+                        .attributes(attributes)
+                        .build();
+            } else {
+                return MessageBuilder.get()
+                        .withBinary(dataStream, actualMimeType)
+                        .attributes(attributes)
+                        .build();
+            }
 
         } catch (ResourceNotFound resourceNotFound) {
             throw new ESBException(resourceNotFound);
