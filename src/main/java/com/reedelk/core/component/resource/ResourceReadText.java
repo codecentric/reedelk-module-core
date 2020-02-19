@@ -31,14 +31,14 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
 
     @InitValue("true")
     @Example("true")
-    @DefaultRenameMe("false")
+    @DefaultValue("false")
     @Property("Auto mime type")
     @PropertyDescription("If true, the mime type of the payload is determined from the extension of the resource read.")
     private boolean autoMimeType;
 
     @MimeTypeCombo
     @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
-    @DefaultRenameMe(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)

@@ -51,7 +51,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
 
     @Example("true")
     @InitValue("true")
-    @DefaultRenameMe("false")
+    @DefaultValue("false")
     @Property("Auto mime type")
     @PropertyDescription("If true, the mime type of the payload is determined from the extension of the resource read.")
     private boolean autoMimeType;
@@ -59,7 +59,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
     @MimeTypeCombo
     @Example(MimeType.MIME_TYPE_IMAGE_JPEG)
     @InitValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
-    @DefaultRenameMe(MimeType.MIME_TYPE_APPLICATION_BINARY)
+    @DefaultValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
     @Property("Mime type")

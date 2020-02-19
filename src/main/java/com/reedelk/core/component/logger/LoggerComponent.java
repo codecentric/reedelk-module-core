@@ -32,7 +32,7 @@ public class LoggerComponent implements ProcessorSync {
 
     @Example("DEBUG")
     @InitValue("INFO")
-    @DefaultRenameMe("INFO")
+    @DefaultValue("INFO")
     @Property("Logger Level")
     @PropertyDescription("The logger level used to log the given message. " +
             "Log levels can be configured from the <i>{RUNTIME_HOME}/config/logback.xml</i> file.")
@@ -40,7 +40,7 @@ public class LoggerComponent implements ProcessorSync {
 
     @Example("<code>'Attributes:' + message.attributes()</code>")
     @InitValue("#[message]")
-    @DefaultRenameMe("<code>message</code>")
+    @DefaultValue("<code>message</code>")
     @Hint("my log message")
     @Property("Log message")
     @PropertyDescription("Sets the message to be logged. It can be a static or dynamic value.")

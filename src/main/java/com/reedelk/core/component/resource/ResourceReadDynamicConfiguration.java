@@ -14,7 +14,7 @@ public class ResourceReadDynamicConfiguration implements Implementor {
 
     @Hint("65536")
     @Example("524288")
-    @DefaultRenameMe("65536")
+    @DefaultValue("65536")
     @Property("Read buffer size")
     @PropertyDescription("The buffer size used to read the files from the resources folder. " +
             "This parameter can be used to improve read performances. " +

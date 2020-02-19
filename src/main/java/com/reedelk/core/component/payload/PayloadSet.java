@@ -26,7 +26,7 @@ public class PayloadSet implements ProcessorSync {
 
     @MimeTypeCombo
     @Example("application/json")
-    @DefaultRenameMe(MimeType.MIME_TYPE_ANY)
+    @DefaultValue(MimeType.MIME_TYPE_ANY)
     @InitValue(MimeType.MIME_TYPE_ANY)
     @Property("Mime type")
     @PropertyDescription("Sets the mime type of the new payload being set.")
