@@ -13,25 +13,37 @@ import org.reactivestreams.Publisher;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ESBComponent("Resource Read Text")
+@ModuleComponent(
+        name = "Resource Read Text",
+        description = "Reads a file from the project's resources folder and sets its content into the flow message. " +
+                "The type of the message payload is string. This component might be used to load text files (e.g .txt, .json, .xml) " +
+                "from the project's resources folder. The Mime Type property assign the mime type of the file to the " +
+                "message payload. If Auto Mime Type is selected, the mime type is automatically determined from " +
+                "the file extension.")
 @Component(service = ResourceReadText.class, scope = PROTOTYPE)
 public class ResourceReadText extends ResourceReadComponent implements ProcessorSync {
 
+    @Hint("assets/sample.txt")
+    @Example("assets/data_model.json")
     @Property("Resource file")
-    @PropertyInfo("The path and name of the file to be read from the project's resources folder.")
+    @PropertyDescription("The path and name of the file to be read from the project's resources folder.")
     private ResourceText resourceFile;
 
+    @InitValue("true")
+    @Example("true")
+    @DefaultRenameMe("false")
     @Property("Auto mime type")
-    @Default("true")
-    @PropertyInfo("If true, the mime type of the payload is determined from the extension of the resource read.")
+    @PropertyDescription("If true, the mime type of the payload is determined from the extension of the resource read.")
     private boolean autoMimeType;
 
-    @Property("Mime type")
     @MimeTypeCombo
-    @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
+    @DefaultRenameMe(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
-    @PropertyInfo("The mime type of the resource read from local project's resources directory.")
+    @Property("Mime type")
+    @PropertyDescription("The mime type of the resource read from local project's resources directory.")
     private String mimeType;
 
     @Override
@@ -41,7 +53,7 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
 
         String resourceFilePath = resourceFile.path();
 
-        MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath);
+        MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath, MimeType.TEXT);
 
         MessageAttributes attributes = createAttributes(ResourceReadText.class, resourceFilePath);
 

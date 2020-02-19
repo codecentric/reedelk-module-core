@@ -16,7 +16,12 @@ import javax.script.ScriptException;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ESBComponent("Logger")
+@ModuleComponent(
+        name = "Logger",
+        description = "This component allows to log information within a flow such as message payload, attributes, " +
+                "context variables and so on. A logger component can be added anywhere in a flow and it can log a " +
+                "simple text value or a dynamic Javascript expression. The Log Message input field type can be toggled " +
+                "to enter a static or dynamic Javascript value.")
 @Component(service = LoggerComponent.class, scope = PROTOTYPE)
 public class LoggerComponent implements ProcessorSync {
 
@@ -25,16 +30,20 @@ public class LoggerComponent implements ProcessorSync {
     @Reference
     private ScriptEngineService service;
 
+    @Example("DEBUG")
+    @InitValue("INFO")
+    @DefaultRenameMe("INFO")
     @Property("Logger Level")
-    @Default("INFO")
-    @PropertyInfo("The logger level used to log the given message. " +
+    @PropertyDescription("The logger level used to log the given message. " +
             "Log levels can be configured from the <i>{RUNTIME_HOME}/config/logback.xml</i> file.")
     private LoggerLevel level;
 
-    @Default("#[message]")
+    @Example("<code>'Attributes:' + message.attributes()</code>")
+    @InitValue("#[message]")
+    @DefaultRenameMe("<code>message</code>")
     @Hint("my log message")
     @Property("Log message")
-    @PropertyInfo("Sets the message to be logged. It can be a static or dynamic value.")
+    @PropertyDescription("Sets the message to be logged. It can be a static or dynamic value.")
     private DynamicObject message;
 
     @Override

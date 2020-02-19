@@ -13,19 +13,18 @@ abstract class ResourceReadComponent {
     private final String attributeResourcePath =  "resourcePath";
     private final String attributeTimestamp = "timestamp";
 
-
     protected MessageAttributes createAttributes(Class<? extends Component> componentClazz, String resourceFilePath) {
         return new DefaultMessageAttributes(componentClazz,
                         of(attributeResourcePath, resourceFilePath,
                                 attributeTimestamp, System.currentTimeMillis()));
     }
 
-    protected static MimeType mimeTypeFrom(boolean autoMimeType, String mimeType, String filePath) {
+    protected static MimeType mimeTypeFrom(boolean autoMimeType, String mimeType, String filePath, MimeType defaultMime) {
         if (autoMimeType) {
             String pageFileExtension = FileUtils.getExtension(filePath);
             return MimeType.fromFileExtension(pageFileExtension);
         } else {
-            return MimeType.parse(mimeType);
+            return MimeType.parse(mimeType, defaultMime);
         }
     }
 }

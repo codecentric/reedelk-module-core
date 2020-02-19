@@ -2,12 +2,12 @@
   "componentDescriptors": [
     {
       "hidden": false,
-      "displayName": "Variable Remove",
+      "displayName": "VariableRemove",
       "fullyQualifiedName": "com.reedelk.core.component.flow.VariableRemove",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
         {
-          "hintValue": "variable name",
+          "hintValue": "mySampleVariable",
           "displayName": "Name",
           "propertyName": "name",
           "defaultValue": "###USE_DEFAULT_VALUE###",
@@ -24,12 +24,12 @@
     },
     {
       "hidden": false,
-      "displayName": "Variable Set",
+      "displayName": "VariableSet",
       "fullyQualifiedName": "com.reedelk.core.component.flow.VariableSet",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
         {
-          "hintValue": "myVariable",
+          "hintValue": "mySampleVariable",
           "displayName": "Name",
           "propertyName": "name",
           "defaultValue": "###USE_DEFAULT_VALUE###",
@@ -179,10 +179,10 @@
           "whenDescriptors": []
         },
         {
-          "hintValue": "variable text value",
+          "hintValue": "my variable content",
           "displayName": "Value",
           "propertyName": "value",
-          "defaultValue": "#[]",
+          "defaultValue": "#[message.payload()]",
           "propertyInfo": "The value to assign to the context variable being set. It might be a static or dynamic value.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
@@ -196,7 +196,7 @@
     },
     {
       "hidden": false,
-      "displayName": "Join Delimiter",
+      "displayName": "JoinWithDelimiter",
       "fullyQualifiedName": "com.reedelk.core.component.join.JoinWithDelimiter",
       "componentType": "JOIN",
       "componentPropertyDescriptors": [
@@ -204,7 +204,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
-          "propertyInfo": "Sets the mime type of the joined content in the message.",
+          "propertyInfo": "Sets the mime type of the joined content in the message",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -353,7 +353,7 @@
     },
     {
       "hidden": false,
-      "displayName": "Join Script",
+      "displayName": "JoinWithScript",
       "fullyQualifiedName": "com.reedelk.core.component.join.JoinWithScript",
       "componentType": "JOIN",
       "componentPropertyDescriptors": [
@@ -497,6 +497,7 @@
           "displayName": "Script",
           "propertyName": "script",
           "defaultValue": "###USE_DEFAULT_VALUE###",
+          "propertyInfo": "The path of the Javascript function to be invoked when executing the component",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeScriptDescriptor",
             "instance": {
@@ -524,7 +525,7 @@
     },
     {
       "hidden": false,
-      "displayName": "Logger",
+      "displayName": "LoggerComponent",
       "fullyQualifiedName": "com.reedelk.core.component.logger.LoggerComponent",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
@@ -566,7 +567,7 @@
     },
     {
       "hidden": false,
-      "displayName": "Payload Set",
+      "displayName": "PayloadSet",
       "fullyQualifiedName": "com.reedelk.core.component.payload.PayloadSet",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
@@ -574,6 +575,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "*/*",
+          "propertyInfo": "Sets the mime type of the new payload being set.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -709,6 +711,7 @@
           "displayName": "Payload",
           "propertyName": "payload",
           "defaultValue": "#[]",
+          "propertyInfo": "The new payload to be set to the current flow message.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -721,12 +724,12 @@
     },
     {
       "hidden": false,
-      "displayName": "Payload To String",
+      "displayName": "PayloadToString",
       "fullyQualifiedName": "com.reedelk.core.component.payload.PayloadToString",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
         {
-          "displayName": "Mime type",
+          "displayName": "Mime Type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
           "propertyInfo": "Sets the new mime type of the payload content.",
@@ -865,7 +868,7 @@
     },
     {
       "hidden": false,
-      "displayName": "Resource Read Binary",
+      "displayName": "ResourceReadBinary",
       "fullyQualifiedName": "com.reedelk.core.component.resource.ResourceReadBinary",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
@@ -898,7 +901,7 @@
         {
           "displayName": "Mime type",
           "propertyName": "mimeType",
-          "defaultValue": "text/plain",
+          "defaultValue": "application/octet-stream",
           "propertyInfo": "The mime type of the resource read from local project\u0027s resources directory.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
@@ -1044,15 +1047,15 @@
     },
     {
       "hidden": false,
-      "displayName": "Resource Read Dynamic",
+      "displayName": "ResourceReadDynamic",
       "fullyQualifiedName": "com.reedelk.core.component.resource.ResourceReadDynamic",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
         {
           "displayName": "Resource file",
           "propertyName": "resourceFile",
-          "defaultValue": "###USE_DEFAULT_VALUE###",
-          "propertyInfo": "The path and name of the file to be read from the project\u0027s resources folder. The value which might be static or a dynamic expression must point to a file existing in the project\u0027s resources directory, e.g: \u003ci\u003e/assets/my_text.txt\u003c/i\u003e",
+          "defaultValue": "#[\u0027/assets/sample.jpg\u0027]",
+          "propertyInfo": "The path and name of the file to be read from the project\u0027s resources folder. The value which might be static or a dynamic expression must point to a file existing in the project\u0027s resources directory",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
@@ -1077,7 +1080,7 @@
         {
           "displayName": "Mime type",
           "propertyName": "mimeType",
-          "defaultValue": "text/plain",
+          "defaultValue": "application/octet-stream",
           "propertyInfo": "The mime type of the resource read from local project\u0027s resources directory.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
@@ -1235,6 +1238,7 @@
                   "displayName": "Read buffer size",
                   "propertyName": "readBufferSize",
                   "defaultValue": "###USE_DEFAULT_VALUE###",
+                  "propertyInfo": "The buffer size used to read the files from the resources folder. This parameter can be used to improve read performances. If the files are big the buffer size should be bigger, otherwise for very small files it should be kept smaller.",
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
@@ -1253,11 +1257,12 @@
     },
     {
       "hidden": false,
-      "displayName": "Resource Read Text",
+      "displayName": "ResourceReadText",
       "fullyQualifiedName": "com.reedelk.core.component.resource.ResourceReadText",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
         {
+          "hintValue": "assets/sample.txt",
           "displayName": "Resource file",
           "propertyName": "resourceFile",
           "defaultValue": "###USE_DEFAULT_VALUE###",
@@ -1432,7 +1437,7 @@
     },
     {
       "hidden": false,
-      "displayName": "Script",
+      "displayName": "ScriptEvaluator",
       "fullyQualifiedName": "com.reedelk.core.component.script.ScriptEvaluator",
       "componentType": "PROCESSOR",
       "componentPropertyDescriptors": [
@@ -1440,7 +1445,7 @@
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "defaultValue": "text/plain",
-          "propertyInfo": "Sets the mime type of the script result in the message payload. E.g: if the result of the script is JSON, then \u003ci\u003eapplication/json\u003c/i\u003e should be selected.This is useful to let the following components know how to process the message payload set by this script. The rest listener for instance uses this information to set the correct content type in the request\u0027s response body.",
+          "propertyInfo": "Sets the mime type of the script result in the message payload; e.g: if the result of the script is JSON, then \u003ci\u003eapplication/json\u003c/i\u003e should be selected.This is useful to let the following components in the flow know how to process the message payload set by this script. For instance, the REST listener would use this information to set the correct content type in the request\u0027s response body.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -1576,7 +1581,7 @@
           "displayName": "Script",
           "propertyName": "script",
           "defaultValue": "###USE_DEFAULT_VALUE###",
-          "propertyInfo": "Sets the script to be executed by this component.",
+          "propertyInfo": "Sets the script file to be executed by this component. Must be a file path and name starting from the project\u0027s resources/scripts directory.",
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeScriptDescriptor",
             "instance": {

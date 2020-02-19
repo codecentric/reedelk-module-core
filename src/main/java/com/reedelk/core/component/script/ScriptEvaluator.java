@@ -13,30 +13,43 @@ import org.osgi.service.component.annotations.Reference;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ESBComponent("Script")
+@ModuleComponent(
+        name = "Script",
+        description = "Executes the given Javascript function and sets the payload content to the result of the " +
+                "evaluated function. The Javascript function must be defined in a file with .js extension in " +
+                "the project's <i>resources/scripts</i> folder. The function must have the following signature:" +
+                "<br>" +
+                "<pre><code> function myFunctionName(context,message) {<br>   // Function code<br>   return 'my result';<br> }<br></code></pre>" +
+                "The <i>context</i> variable can be used to access data stored in the flow context and the <i>message</i> variable is the current flow message object. " +
+                "To access the message content from the script use <code>message.payload()</code>.")
 @Component(service = ScriptEvaluator.class, scope = PROTOTYPE)
 public class ScriptEvaluator implements ProcessorSync {
 
     @Reference
     private ScriptEngineService service;
 
-    @Property("Mime type")
-    @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
     @MimeTypeCombo
-    @PropertyInfo("Sets the mime type of the script result in the message payload. " +
-            "E.g: if the result of the script is JSON, then <i>application/json</i> should be selected." +
-            "This is useful to let the following components know how to process the message payload set by this script. " +
-            "The rest listener for instance uses this information to set the correct content type in the request's response body.")
+    @Example(MimeType.MIME_TYPE_TEXT_XML)
+    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @DefaultRenameMe(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Property("Mime type")
+    @PropertyDescription("Sets the mime type of the script result in the message payload; " +
+            "e.g: if the result of the script is JSON, then <i>application/json</i> should be selected." +
+            "This is useful to let the following components in the flow know how to process the message payload set " +
+            "by this script. For instance, the REST listener would use this information to set the correct content type " +
+            "in the request's response body.")
     private String mimeType;
 
+    @Example("mapJsonModel.js")
     @Property("Script")
-    @PropertyInfo("Sets the script to be executed by this component.")
+    @PropertyDescription("Sets the script file to be executed by this component. " +
+            "Must be a file path and name starting from the project's resources/scripts directory.")
     private Script script;
 
     @Override
     public Message apply(FlowContext flowContext, Message message) {
 
-        MimeType mimeType = MimeType.parse(this.mimeType);
+        MimeType mimeType = MimeType.parse(this.mimeType, MimeType.TEXT);
 
         Object evaluated = service.evaluate(script, Object.class, flowContext, message).orElse(null);
 

@@ -15,22 +15,31 @@ import java.util.stream.Collectors;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ESBComponent("Join Delimiter")
+@ModuleComponent(
+        name = "Join With Delimiter",
+        description = "Can only be placed after a Fork. It joins the payloads of the messages resulting " +
+                "from the execution of the Fork with the provided delimiter. " +
+                "A delimiter can be a single character or any other string. " +
+                "The mime type property specifies the mime type of the joined payloads. " +
+                "This component automatically converts the payload of each single input message to string " +
+                "in case they are not a string type already.")
 @Component(service = JoinWithDelimiter.class, scope = PROTOTYPE)
 public class JoinWithDelimiter implements Join {
 
     @Reference
     private ConverterService converterService;
 
-    @Property("Mime type")
-    @Default(MimeType.MIME_TYPE_TEXT_PLAIN)
     @MimeTypeCombo
-    @PropertyInfo("Sets the mime type of the joined content in the message.")
+    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
+    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Property("Mime type")
+    @PropertyDescription("Sets the mime type of the joined content in the message")
     private String mimeType;
 
+    @Example(";")
+    @InitValue(",")
     @Property("Delimiter")
-    @PropertyInfo("The delimiter char (or string) to be used to join the content of the messages.")
-    @Default(",")
+    @PropertyDescription("The delimiter char (or string) to be used to join the content of the messages.")
     private String delimiter;
 
     @Override
