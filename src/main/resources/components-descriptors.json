@@ -1,12 +1,12 @@
 {
-  "componentDescriptors": [
+  "components": [
     {
       "hidden": false,
       "displayName": "Variable Remove",
       "description": "Removes a variable previously set in the flow context.",
       "fullyQualifiedName": "com.reedelk.core.component.flow.VariableRemove",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "mySampleVariable",
           "initValue": "###USE_DEFAULT_VALUE###",
@@ -14,13 +14,13 @@
           "displayName": "Name",
           "propertyName": "name",
           "propertyDescription": "The name of the variable to be removed from the flow context.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
               "type": "java.lang.String"
             }
-          },
-          "whenDescriptors": []
+          }
         }
       ]
     },
@@ -30,7 +30,7 @@
       "description": "Sets a variable in the flow context with the provided value. The assigned value must be serializable.",
       "fullyQualifiedName": "com.reedelk.core.component.flow.VariableSet",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "mySampleVariable",
           "initValue": "###USE_DEFAULT_VALUE###",
@@ -38,13 +38,13 @@
           "displayName": "Name",
           "propertyName": "name",
           "propertyDescription": "The name of the variable to be set in the flow context.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
               "type": "java.lang.String"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "application/json",
@@ -53,6 +53,7 @@
           "defaultValue": "*/*",
           "propertyName": "mimeType",
           "propertyDescription": "The mime type of the value this context variable will be bound to.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -181,8 +182,7 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "\u003ccode\u003emessage.attributes().pathParams\u003c/code\u003e",
@@ -191,13 +191,13 @@
           "displayName": "Value",
           "propertyName": "value",
           "propertyDescription": "The value to assign to the context variable being set. It might be a static or dynamic value.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
               "type": "com.reedelk.runtime.api.script.dynamicvalue.DynamicObject"
             }
-          },
-          "whenDescriptors": []
+          }
         }
       ]
     },
@@ -207,13 +207,14 @@
       "description": "Can only be placed after a Fork. It joins the payloads of the messages resulting from the execution of the Fork with the provided delimiter. A delimiter can be a single character or any other string. The mime type property specifies the mime type of the joined payloads. This component automatically converts the payload of each single input message to string in case they are not a string type already.",
       "fullyQualifiedName": "com.reedelk.core.component.join.JoinWithDelimiter",
       "componentType": "JOIN",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "application/json",
           "initValue": "text/plain",
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "propertyDescription": "Sets the mime type of the joined content in the message",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -342,8 +343,7 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": ";",
@@ -351,13 +351,13 @@
           "displayName": "Delimiter",
           "propertyName": "delimiter",
           "propertyDescription": "The delimiter char (or string) to be used to join the content of the messages.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
               "type": "java.lang.String"
             }
-          },
-          "whenDescriptors": []
+          }
         }
       ]
     },
@@ -367,13 +367,14 @@
       "description": "Can only be placed after a Fork. It joins the payloads of the messages resulting from the execution of the Fork with the provided Javascript function. The mime type property specifies the mime type of the joined payloads. If the result of the script is null, an empty message payload content is set.",
       "fullyQualifiedName": "com.reedelk.core.component.join.JoinWithScript",
       "componentType": "JOIN",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "application/json",
           "initValue": "text/plain",
           "displayName": "Mime type",
           "propertyName": "mimeType",
           "propertyDescription": "Sets the mime type of the joined content in the message.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -502,8 +503,7 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "joiners/joinByType.js",
@@ -511,20 +511,20 @@
           "displayName": "Script",
           "propertyName": "script",
           "propertyDescription": "The path of the Javascript function to be invoked when executing the component",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeScriptDescriptor",
             "instance": {
               "type": "com.reedelk.runtime.api.script.Script"
             }
           },
-          "whenDescriptors": [],
-          "scriptSignatureDescriptor": {
+          "scriptSignature": {
             "arguments": [
               "context",
               "messages"
             ]
           },
-          "autoCompleteContributorDescriptor": {
+          "autocompleteContributor": {
             "error": false,
             "message": false,
             "context": true,
@@ -542,7 +542,7 @@
       "description": "This component allows to log information within a flow such as message payload, attributes, context variables and so on. A logger component can be added anywhere in a flow and it can log a simple text value or a dynamic Javascript expression. The Log Message input field type can be toggled to enter a static or dynamic Javascript value.",
       "fullyQualifiedName": "com.reedelk.core.component.logger.LoggerComponent",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "DEBUG",
           "initValue": "INFO",
@@ -550,6 +550,7 @@
           "defaultValue": "INFO",
           "propertyName": "level",
           "propertyDescription": "The logger level used to log the given message. Log levels can be configured from the \u003ci\u003e{RUNTIME_HOME}/config/logback.xml\u003c/i\u003e file.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeEnumDescriptor",
             "instance": {
@@ -562,8 +563,7 @@
               },
               "type": "java.lang.Enum"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "\u003ccode\u003e\u0027Attributes:\u0027 + message.attributes()\u003c/code\u003e",
@@ -573,13 +573,13 @@
           "defaultValue": "\u003ccode\u003emessage\u003c/code\u003e",
           "propertyName": "message",
           "propertyDescription": "Sets the message to be logged. It can be a static or dynamic value.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
               "type": "com.reedelk.runtime.api.script.dynamicvalue.DynamicObject"
             }
-          },
-          "whenDescriptors": []
+          }
         }
       ]
     },
@@ -589,7 +589,7 @@
       "description": "Sets the content of the current message payload to the given payload value. The payload value could be a static text value or a dynamic expression. The mime type specifies the type of the new payload value.",
       "fullyQualifiedName": "com.reedelk.core.component.payload.PayloadSet",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "application/json",
           "initValue": "*/*",
@@ -597,6 +597,7 @@
           "defaultValue": "*/*",
           "propertyName": "mimeType",
           "propertyDescription": "Sets the mime type of the new payload being set.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -725,8 +726,7 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "\u003ccode\u003eJSON.stringify({ data: message.payload(), id: Util.uuid() }\u003c/code\u003e",
@@ -734,13 +734,13 @@
           "displayName": "Payload",
           "propertyName": "payload",
           "propertyDescription": "The new payload to be set to the current flow message.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
               "type": "com.reedelk.runtime.api.script.dynamicvalue.DynamicObject"
             }
-          },
-          "whenDescriptors": []
+          }
         }
       ]
     },
@@ -750,13 +750,14 @@
       "description": "Transforms the message payload to string type. This component can be used when the payload is a byte array or a byte array stream and we want to convert it to a string for further processing. This might be necessary for instance when the result of a REST Call does not have a mime type assigned. In this case the result will be a byte array and in order to further process the content with a script we must convert it to a string type.",
       "fullyQualifiedName": "com.reedelk.core.component.payload.PayloadToString",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "application/json",
           "initValue": "text/plain",
           "displayName": "Mime Type",
           "propertyName": "mimeType",
           "propertyDescription": "Sets the new mime type of the payload content.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -885,8 +886,7 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": []
+          }
         }
       ]
     },
@@ -896,20 +896,20 @@
       "description": "Reads a file from the project\u0027s resources folder and sets its content into the flow message. The type of the message payload is byte array. This component might be used to load binary data (e.g a picture file) from the project\u0027s resources folder. The Mime Type property assign the mime type of the file to the message payload. If Auto Mime Type is selected, the mime type is automatically determined from the file extension.",
       "fullyQualifiedName": "com.reedelk.core.component.resource.ResourceReadBinary",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "assets/my_image.jpg",
           "initValue": "###USE_DEFAULT_VALUE###",
           "displayName": "Resource file",
           "propertyName": "resourceFile",
           "propertyDescription": "The path and name of the file to be read from the project\u0027s resources folder.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeResourceBinaryDescriptor",
             "instance": {
               "type": "com.reedelk.runtime.api.resource.ResourceBinary"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "true",
@@ -918,13 +918,13 @@
           "defaultValue": "false",
           "propertyName": "autoMimeType",
           "propertyDescription": "If true, the mime type of the payload is determined from the extension of the resource read.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
               "type": "boolean"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "image/jpeg",
@@ -933,6 +933,16 @@
           "defaultValue": "application/octet-stream",
           "propertyName": "mimeType",
           "propertyDescription": "The mime type of the resource read from local project\u0027s resources directory.",
+          "whens": [
+            {
+              "propertyName": "autoMimeType",
+              "propertyValue": "false"
+            },
+            {
+              "propertyName": "autoMimeType",
+              "propertyValue": "###BLANK###"
+            }
+          ],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -1061,17 +1071,7 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": [
-            {
-              "propertyName": "autoMimeType",
-              "propertyValue": "false"
-            },
-            {
-              "propertyName": "autoMimeType",
-              "propertyValue": "###BLANK###"
-            }
-          ]
+          }
         }
       ]
     },
@@ -1081,20 +1081,20 @@
       "description": "Reads a file from the project\u0027s resources folder and sets its content into the flow message. The type of the message payload is byte array. The Mime Type property assign the mime type of the file to the message payload. If Auto Mime Type is selected, the mime type is automatically determined from the file extension. This component allows to specify the path and file name of the resource with a dynamic value instead of a static one. This component might be used to load binary data (e.g a picture file) from the project\u0027s resources folder in a dynamic fashion: for instance loading files from a given REST Listener request path\u0027s value.",
       "fullyQualifiedName": "com.reedelk.core.component.resource.ResourceReadDynamic",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "\u003ccode\u003emessage.attributes().get(\u0027pathParams\u0027).filePathParam\u003c/code\u003e",
           "initValue": "#[\u0027/assets/sample.jpg\u0027]",
           "displayName": "Resource file",
           "propertyName": "resourceFile",
           "propertyDescription": "The path and name of the file to be read from the project\u0027s resources folder. The value which might be static or a dynamic expression must point to a file existing in the project\u0027s resources directory",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeDynamicValueDescriptor",
             "instance": {
               "type": "com.reedelk.runtime.api.resource.DynamicResource"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "true",
@@ -1103,13 +1103,13 @@
           "defaultValue": "false",
           "propertyName": "autoMimeType",
           "propertyDescription": "If true, the mime type of the payload is determined from the extension of the resource read.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
               "type": "boolean"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "image/jpeg",
@@ -1118,6 +1118,16 @@
           "defaultValue": "application/octet-stream",
           "propertyName": "mimeType",
           "propertyDescription": "The mime type of the resource read from local project\u0027s resources directory.",
+          "whens": [
+            {
+              "propertyName": "autoMimeType",
+              "propertyValue": "false"
+            },
+            {
+              "propertyName": "autoMimeType",
+              "propertyValue": "###BLANK###"
+            }
+          ],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -1246,22 +1256,13 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": [
-            {
-              "propertyName": "autoMimeType",
-              "propertyValue": "false"
-            },
-            {
-              "propertyName": "autoMimeType",
-              "propertyValue": "###BLANK###"
-            }
-          ]
+          }
         },
         {
           "initValue": "###USE_DEFAULT_VALUE###",
           "displayName": "Configuration",
           "propertyName": "configuration",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeObjectDescriptor",
             "instance": {
@@ -1277,19 +1278,18 @@
                   "defaultValue": "65536",
                   "propertyName": "readBufferSize",
                   "propertyDescription": "The buffer size used to read the files from the resources folder. This parameter can be used to improve read performances. If the files are big the buffer size should be bigger, otherwise for very small files it should be kept smaller.",
+                  "whens": [],
                   "propertyType": {
                     "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
                     "instance": {
                       "type": "java.lang.Integer"
                     }
-                  },
-                  "whenDescriptors": []
+                  }
                 }
               ],
               "type": "com.reedelk.module.descriptor.model.TypeObjectDescriptor$TypeObject"
             }
-          },
-          "whenDescriptors": []
+          }
         }
       ]
     },
@@ -1299,7 +1299,7 @@
       "description": "Reads a file from the project\u0027s resources folder and sets its content into the flow message. The type of the message payload is string. This component might be used to load text files (e.g .txt, .json, .xml) from the project\u0027s resources folder. The Mime Type property assign the mime type of the file to the message payload. If Auto Mime Type is selected, the mime type is automatically determined from the file extension.",
       "fullyQualifiedName": "com.reedelk.core.component.resource.ResourceReadText",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "assets/data_model.json",
           "initValue": "###USE_DEFAULT_VALUE###",
@@ -1307,13 +1307,13 @@
           "displayName": "Resource file",
           "propertyName": "resourceFile",
           "propertyDescription": "The path and name of the file to be read from the project\u0027s resources folder.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeResourceTextDescriptor",
             "instance": {
               "type": "com.reedelk.runtime.api.resource.ResourceText"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "true",
@@ -1322,13 +1322,13 @@
           "defaultValue": "false",
           "propertyName": "autoMimeType",
           "propertyDescription": "If true, the mime type of the payload is determined from the extension of the resource read.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypePrimitiveDescriptor",
             "instance": {
               "type": "boolean"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "application/json",
@@ -1337,6 +1337,16 @@
           "defaultValue": "text/plain",
           "propertyName": "mimeType",
           "propertyDescription": "The mime type of the resource read from local project\u0027s resources directory.",
+          "whens": [
+            {
+              "propertyName": "autoMimeType",
+              "propertyValue": "false"
+            },
+            {
+              "propertyName": "autoMimeType",
+              "propertyValue": "###BLANK###"
+            }
+          ],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -1465,17 +1475,7 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": [
-            {
-              "propertyName": "autoMimeType",
-              "propertyValue": "false"
-            },
-            {
-              "propertyName": "autoMimeType",
-              "propertyValue": "###BLANK###"
-            }
-          ]
+          }
         }
       ]
     },
@@ -1485,7 +1485,7 @@
       "description": "Executes the given Javascript function and sets the payload content to the result of the evaluated function. The Javascript function must be defined in a file with .js extension in the project\u0027s \u003ci\u003eresources/scripts\u003c/i\u003e folder. The function must have the following signature:\u003cbr\u003e\u003cpre\u003e\u003ccode\u003e function myFunctionName(context,message) {\u003cbr\u003e   // Function code\u003cbr\u003e   return \u0027my result\u0027;\u003cbr\u003e }\u003cbr\u003e\u003c/code\u003e\u003c/pre\u003eThe \u003ci\u003econtext\u003c/i\u003e variable can be used to access data stored in the flow context and the \u003ci\u003emessage\u003c/i\u003e variable is the current flow message object. To access the message content from the script use \u003ccode\u003emessage.payload()\u003c/code\u003e.",
       "fullyQualifiedName": "com.reedelk.core.component.script.ScriptEvaluator",
       "componentType": "PROCESSOR",
-      "componentPropertyDescriptors": [
+      "properties": [
         {
           "example": "text/xml",
           "initValue": "text/plain",
@@ -1493,6 +1493,7 @@
           "defaultValue": "text/plain",
           "propertyName": "mimeType",
           "propertyDescription": "Sets the mime type of the script result in the message payload; e.g: if the result of the script is JSON, then \u003ci\u003eapplication/json\u003c/i\u003e should be selected.This is useful to let the following components in the flow know how to process the message payload set by this script. For instance, the REST listener would use this information to set the correct content type in the request\u0027s response body.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeComboDescriptor",
             "instance": {
@@ -1621,8 +1622,7 @@
               ],
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
-          },
-          "whenDescriptors": []
+          }
         },
         {
           "example": "mapJsonModel.js",
@@ -1630,18 +1630,18 @@
           "displayName": "Script",
           "propertyName": "script",
           "propertyDescription": "Sets the script file to be executed by this component. Must be a file path and name starting from the project\u0027s resources/scripts directory.",
+          "whens": [],
           "propertyType": {
             "classname": "com.reedelk.module.descriptor.model.TypeScriptDescriptor",
             "instance": {
               "type": "com.reedelk.runtime.api.script.Script"
             }
-          },
-          "whenDescriptors": []
+          }
         }
       ]
     }
   ],
-  "autocompleteContributorDescriptors": [
+  "autocompleteContributors": [
     {
       "error": false,
       "message": false,
