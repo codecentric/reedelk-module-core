@@ -19,6 +19,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
                 "evaluated function. The Javascript function must be defined in a file with .js extension in " +
                 "the project's <i>resources/scripts</i> folder. The function must have the following signature:" +
                 "<br>" +
+                "<br>" +
                 "<pre><code> function myFunctionName(context,message) {<br>   // Function code<br>   return 'my result';<br> }<br></code></pre>" +
                 "The <i>context</i> variable can be used to access data stored in the flow context and the <i>message</i> variable is the current flow message object. " +
                 "To access the message content from the script use <code>message.payload()</code>.")
