@@ -1,6 +1,5 @@
 package com.reedelk.core.component;
 
-import com.reedelk.core.component.ResourceReadBinary;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
