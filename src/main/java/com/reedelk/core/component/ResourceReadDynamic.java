@@ -1,4 +1,4 @@
-package com.reedelk.core.component.resource;
+package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.commons.JavaType;
@@ -21,7 +21,7 @@ import org.reactivestreams.Publisher;
 
 import java.util.Optional;
 
-import static com.reedelk.core.component.resource.ResourceReadDynamicConfiguration.DEFAULT_READ_BUFFER_SIZE;
+import static com.reedelk.core.component.ResourceReadDynamicConfiguration.DEFAULT_READ_BUFFER_SIZE;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Resource Read Dynamic")

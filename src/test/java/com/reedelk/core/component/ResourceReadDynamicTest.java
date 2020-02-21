@@ -1,5 +1,7 @@
-package com.reedelk.core.component.resource;
+package com.reedelk.core.component;
 
+import com.reedelk.core.component.ResourceReadDynamic;
+import com.reedelk.core.component.ResourceReadDynamicConfiguration;
 import com.reedelk.runtime.api.commons.ModuleContext;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.flow.FlowContext;

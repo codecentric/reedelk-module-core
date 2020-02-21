@@ -1,5 +1,6 @@
-package com.reedelk.core.component.logger;
+package com.reedelk.core.commons;
 
+import com.reedelk.core.component.LoggerComponent;
 import com.reedelk.runtime.api.annotation.DisplayName;
 
 public enum LoggerLevel implements MessageLogger {

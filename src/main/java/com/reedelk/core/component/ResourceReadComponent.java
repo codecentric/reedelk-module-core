@@ -1,4 +1,4 @@
-package com.reedelk.core.component.resource;
+package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.commons.FileUtils;
 import com.reedelk.runtime.api.component.Component;

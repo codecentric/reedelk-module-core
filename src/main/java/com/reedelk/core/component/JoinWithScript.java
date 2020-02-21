@@ -1,4 +1,4 @@
-package com.reedelk.core.component.join;
+package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.Join;

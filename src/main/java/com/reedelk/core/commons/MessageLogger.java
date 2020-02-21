@@ -1,4 +1,4 @@
-package com.reedelk.core.component.logger;
+package com.reedelk.core.commons;
 
 public interface MessageLogger {
 

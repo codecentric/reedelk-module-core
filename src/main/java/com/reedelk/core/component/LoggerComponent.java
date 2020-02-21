@@ -1,5 +1,6 @@
-package com.reedelk.core.component.logger;
+package com.reedelk.core.component;
 
+import com.reedelk.core.commons.LoggerLevel;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.exception.ESBException;
@@ -24,7 +25,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = LoggerComponent.class, scope = PROTOTYPE)
 public class LoggerComponent implements ProcessorSync {
 
-    static final Logger logger = LoggerFactory.getLogger(LoggerComponent.class);
+    public static final Logger logger = LoggerFactory.getLogger(LoggerComponent.class);
 
     @Property("Logger Level")
     @Example("DEBUG")
