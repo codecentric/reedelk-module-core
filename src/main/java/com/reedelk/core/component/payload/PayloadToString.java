@@ -15,9 +15,8 @@ import org.osgi.service.component.annotations.Reference;
 import static com.reedelk.runtime.api.commons.ConfigurationPreconditions.requireNotBlank;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ModuleComponent(
-        name = "Payload To String",
-        description = "Transforms the message payload to string type. This component can be used when the payload " +
+@ModuleComponent("Payload To String")
+@Description("Transforms the message payload to string type. This component can be used when the payload " +
                 "is a byte array or a byte array stream and we want to convert it to a string for further processing. " +
                 "This might be necessary for instance when the result of a REST Call does not have a mime type assigned. " +
                 "In this case the result will be a byte array and in order to further process the content with a script " +
@@ -25,15 +24,15 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = PayloadToString.class, scope = PROTOTYPE)
 public class PayloadToString implements ProcessorSync {
 
+    @Property("Mime Type")
+    @MimeTypeCombo
+    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
+    @Description("Sets the new mime type of the payload content.")
+    private String mimeType;
+
     @Reference
     private ConverterService converterService;
-
-    @MimeTypeCombo
-    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
-    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
-    @Property("Mime Type")
-    @PropertyDescription("Sets the new mime type of the payload content.")
-    private String mimeType;
 
     private MimeType wantedMimeType;
 

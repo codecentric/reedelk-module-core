@@ -16,9 +16,8 @@ import javax.script.ScriptException;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ModuleComponent(
-        name = "Logger",
-        description = "This component allows to log information within a flow such as message payload, attributes, " +
+@ModuleComponent("Logger")
+@Description("This component allows to log information within a flow such as message payload, attributes, " +
                 "context variables and so on. A logger component can be added anywhere in a flow and it can log a " +
                 "simple text value or a dynamic Javascript expression. The Log Message input field type can be toggled " +
                 "to enter a static or dynamic Javascript value.")
@@ -27,24 +26,24 @@ public class LoggerComponent implements ProcessorSync {
 
     static final Logger logger = LoggerFactory.getLogger(LoggerComponent.class);
 
-    @Reference
-    private ScriptEngineService service;
-
+    @Property("Logger Level")
     @Example("DEBUG")
     @InitValue("INFO")
     @DefaultValue("INFO")
-    @Property("Logger Level")
-    @PropertyDescription("The logger level used to log the given message. " +
+    @Description("The logger level used to log the given message. " +
             "Log levels can be configured from the <i>{RUNTIME_HOME}/config/logback.xml</i> file.")
     private LoggerLevel level;
 
-    @Example("<code>'Attributes:' + message.attributes()</code>")
+    @Property("Log message")
+    @Hint("my log message")
     @InitValue("#[message]")
     @DefaultValue("<code>message</code>")
-    @Hint("my log message")
-    @Property("Log message")
-    @PropertyDescription("Sets the message to be logged. It can be a static or dynamic value.")
+    @Example("<code>'Attributes:' + message.attributes()</code>")
+    @Description("Sets the message to be logged. It can be a static or dynamic value.")
     private DynamicObject message;
+
+    @Reference
+    private ScriptEngineService service;
 
     @Override
     public Message apply(FlowContext flowContext, Message message) {

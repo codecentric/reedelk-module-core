@@ -17,9 +17,8 @@ import org.reactivestreams.Publisher;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ModuleComponent(
-        name = "Resource Read Binary",
-        description = "Reads a file from the project's resources folder and sets its content into the flow message. " +
+@ModuleComponent("Resource Read Binary")
+@Description("Reads a file from the project's resources folder and sets its content into the flow message. " +
                 "The type of the message payload is byte array. This component might be used to load binary " +
                 "data (e.g a picture file) from the project's resources folder. The Mime Type property assign the " +
                 "mime type of the file to the message payload. If Auto Mime Type is selected, the mime type is " +
@@ -27,26 +26,26 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = ResourceReadBinary.class, scope = PROTOTYPE)
 public class ResourceReadBinary extends ResourceReadComponent implements ProcessorSync {
 
-    @Example("assets/my_image.jpg")
     @Property("Resource file")
-    @PropertyDescription("The path and name of the file to be read from the project's resources folder.")
+    @Example("assets/my_image.jpg")
+    @Description("The path and name of the file to be read from the project's resources folder.")
     private ResourceBinary resourceFile;
 
+    @Property("Auto mime type")
     @Example("true")
     @InitValue("true")
     @DefaultValue("false")
-    @Property("Auto mime type")
-    @PropertyDescription("If true, the mime type of the payload is determined from the extension of the resource read.")
+    @Description("If true, the mime type of the payload is determined from the extension of the resource read.")
     private boolean autoMimeType;
 
+    @Property("Mime type")
     @MimeTypeCombo
     @Example(MimeType.MIME_TYPE_IMAGE_JPEG)
     @InitValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
     @DefaultValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
-    @Property("Mime type")
-    @PropertyDescription("The mime type of the resource read from local project's resources directory.")
+    @Description("The mime type of the resource read from local project's resources directory.")
     private String mimeType;
 
     @Reference

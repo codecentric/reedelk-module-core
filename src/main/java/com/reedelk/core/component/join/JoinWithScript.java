@@ -16,33 +16,32 @@ import java.util.Optional;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ModuleComponent(
-        name = "Join Script",
-        description = "Can only be placed after a Fork. It joins the payloads of the messages resulting " +
+@ModuleComponent("Join Script")
+@Description("Can only be placed after a Fork. It joins the payloads of the messages resulting " +
                 "from the execution of the Fork with the provided Javascript function. " +
                 "The mime type property specifies the mime type of the joined payloads. " +
                 "If the result of the script is null, an empty message payload content is set.")
 @Component(service = JoinWithScript.class, scope = PROTOTYPE)
 public class JoinWithScript implements Join {
 
-    @Reference
-    private ScriptEngineService service;
-
-    @MimeTypeCombo
-    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
-    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @Property("Mime type")
-    @PropertyDescription("Sets the mime type of the joined content in the message.")
+    @MimeTypeCombo
+    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
+    @Description("Sets the mime type of the joined content in the message.")
     private String mimeType;
 
+    @Property("Script")
+    @Example("joiners/joinByType.js")
     @ScriptSignature(arguments = {"context","messages"})
     @AutoCompleteContributor(message = false, contributions = {
             "messages[VARIABLE:Message[]]",
             "messages.size()[FUNCTION:int]"})
-    @Example("joiners/joinByType.js")
-    @Property("Script")
-    @PropertyDescription("The path of the Javascript function to be invoked when executing the component")
+    @Description("The path of the Javascript function to be invoked when executing the component")
     private Script script;
+
+    @Reference
+    private ScriptEngineService service;
 
     @Override
     public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {

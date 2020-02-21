@@ -24,9 +24,8 @@ import java.util.Optional;
 import static com.reedelk.core.component.resource.ResourceReadDynamicConfiguration.DEFAULT_READ_BUFFER_SIZE;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ModuleComponent(
-        name = "Resource Read Dynamic",
-        description = "Reads a file from the project's resources folder and sets its content into the flow message. " +
+@ModuleComponent("Resource Read Dynamic")
+@Description("Reads a file from the project's resources folder and sets its content into the flow message. " +
                 "The type of the message payload is byte array. The Mime Type property assign the mime type of the " +
                 "file to the message payload. If Auto Mime Type is selected, the mime type is automatically determined " +
                 "from the file extension. This component allows to specify the path and file name of the resource with " +
@@ -36,38 +35,38 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = ResourceReadDynamic.class, scope = PROTOTYPE)
 public class ResourceReadDynamic extends ResourceReadComponent implements ProcessorSync {
 
-    @Reference
-    ResourceService resourceService;
-    @Reference
-    ConverterService converterService;
-
+    @Property("Resource file")
     @InitValue("#['/assets/sample.jpg']")
     @Example("<code>message.attributes().get('pathParams').filePathParam</code>")
-    @Property("Resource file")
-    @PropertyDescription("The path and name of the file to be read from the project's resources folder. " +
+    @Description("The path and name of the file to be read from the project's resources folder. " +
             "The value which might be static or a dynamic expression must point to a file existing in the project's " +
             "resources directory")
     private DynamicResource resourceFile;
 
+    @Property("Auto mime type")
     @Example("true")
     @InitValue("true")
     @DefaultValue("false")
-    @Property("Auto mime type")
-    @PropertyDescription("If true, the mime type of the payload is determined from the extension of the resource read.")
+    @Description("If true, the mime type of the payload is determined from the extension of the resource read.")
     private boolean autoMimeType;
 
+    @Property("Mime type")
     @MimeTypeCombo
     @Example(MimeType.MIME_TYPE_IMAGE_JPEG)
     @InitValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
     @DefaultValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
-    @Property("Mime type")
-    @PropertyDescription("The mime type of the resource read from local project's resources directory.")
+    @Description("The mime type of the resource read from local project's resources directory.")
     private String mimeType;
 
     @Property("Configuration")
     private ResourceReadDynamicConfiguration configuration;
+
+    @Reference
+    ResourceService resourceService;
+    @Reference
+    ConverterService converterService;
 
     private int readBufferSize;
 

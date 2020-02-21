@@ -13,9 +13,8 @@ import org.osgi.service.component.annotations.Reference;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ModuleComponent(
-        name = "Script",
-        description = "Executes the given Javascript function and sets the payload content to the result of the " +
+@ModuleComponent("Script")
+@Description("Executes the given Javascript function and sets the payload content to the result of the " +
                 "evaluated function. The Javascript function must be defined in a file with .js extension in " +
                 "the project's <i>resources/scripts</i> folder. The function must have the following signature:" +
                 "<br>" +
@@ -26,26 +25,26 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = ScriptEvaluator.class, scope = PROTOTYPE)
 public class ScriptEvaluator implements ProcessorSync {
 
-    @Reference
-    private ScriptEngineService service;
-
+    @Property("Mime type")
     @MimeTypeCombo
     @Example(MimeType.MIME_TYPE_TEXT_XML)
     @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
-    @Property("Mime type")
-    @PropertyDescription("Sets the mime type of the script result in the message payload; " +
+    @Description("Sets the mime type of the script result in the message payload; " +
             "e.g: if the result of the script is JSON, then <i>application/json</i> should be selected." +
             "This is useful to let the following components in the flow know how to process the message payload set " +
             "by this script. For instance, the REST listener would use this information to set the correct content type " +
             "in the request's response body.")
     private String mimeType;
 
-    @Example("mapJsonModel.js")
     @Property("Script")
-    @PropertyDescription("Sets the script file to be executed by this component. " +
+    @Example("mapJsonModel.js")
+    @Description("Sets the script file to be executed by this component. " +
             "Must be a file path and name starting from the project's resources/scripts directory.")
     private Script script;
+
+    @Reference
+    private ScriptEngineService service;
 
     @Override
     public Message apply(FlowContext flowContext, Message message) {
