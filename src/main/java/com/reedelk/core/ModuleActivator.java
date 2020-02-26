@@ -1,6 +1,6 @@
 package com.reedelk.core;
 
-import com.reedelk.core.script.CoreScriptModules;
+import com.reedelk.core.script.ScriptModules;
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import org.osgi.framework.BundleContext;
@@ -20,7 +20,7 @@ public class ModuleActivator {
 
     @Activate
     public void start(BundleContext context) {
-        CoreScriptModules coreScriptModules = new CoreScriptModules(context.getBundle().getBundleId(), configurationService);
-        scriptEngine.register(coreScriptModules);
+        ScriptModules scriptModules = new ScriptModules(context.getBundle().getBundleId(), configurationService);
+        scriptEngine.register(scriptModules);
     }
 }

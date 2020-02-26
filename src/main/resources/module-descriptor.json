@@ -1,4 +1,5 @@
 {
+  "name": "module-core",
   "components": [
     {
       "hidden": false,
@@ -142,6 +143,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -156,6 +158,7 @@
               "type": "java.lang.String"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
@@ -302,6 +305,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -322,15 +326,7 @@
               "messages"
             ]
           },
-          "autocompleteContributor": {
-            "error": false,
-            "message": false,
-            "context": true,
-            "contributions": [
-              "messages[VARIABLE:Message[]]",
-              "messages.size()[FUNCTION:int]"
-            ]
-          },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
@@ -362,6 +358,7 @@
               "type": "java.lang.Enum"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -378,6 +375,7 @@
               "type": "com.reedelk.runtime.api.script.dynamicvalue.DynamicObject"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
@@ -525,6 +523,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -539,6 +538,7 @@
               "type": "com.reedelk.runtime.api.script.dynamicvalue.DynamicObject"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
@@ -685,6 +685,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
@@ -708,6 +709,7 @@
               "type": "com.reedelk.runtime.api.resource.ResourceBinary"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -723,6 +725,7 @@
               "type": "boolean"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -861,6 +864,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": [
             {
               "propertyName": "autoMimeType",
@@ -893,6 +897,7 @@
               "type": "com.reedelk.runtime.api.resource.DynamicResource"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -908,6 +913,7 @@
               "type": "boolean"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -1046,6 +1052,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": [
             {
               "propertyName": "autoMimeType",
@@ -1082,12 +1089,14 @@
                       "type": "java.lang.Integer"
                     }
                   },
+                  "autocompleteVariables": [],
                   "whens": []
                 }
               ],
               "type": "com.reedelk.module.descriptor.model.TypeObjectDescriptor$TypeObject"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
@@ -1112,6 +1121,7 @@
               "type": "com.reedelk.runtime.api.resource.ResourceText"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -1127,6 +1137,7 @@
               "type": "boolean"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -1265,6 +1276,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": [
             {
               "propertyName": "autoMimeType",
@@ -1421,6 +1433,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -1435,6 +1448,7 @@
               "type": "com.reedelk.runtime.api.script.Script"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
@@ -1459,6 +1473,7 @@
               "type": "java.lang.String"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
@@ -1483,6 +1498,7 @@
               "type": "java.lang.String"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -1621,6 +1637,7 @@
               "type": "com.reedelk.runtime.api.annotation.Combo"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         },
         {
@@ -1636,40 +1653,210 @@
               "type": "com.reedelk.runtime.api.script.dynamicvalue.DynamicObject"
             }
           },
+          "autocompleteVariables": [],
           "whens": []
         }
       ]
     }
   ],
-  "autocompleteContributors": [
+  "autocompleteItems": [
     {
-      "error": false,
-      "message": false,
-      "context": false,
-      "contributions": [
-        "Util[VARIABLE:Util]",
-        "Util.tmpdir()[FUNCTION:String]",
-        "Util.uuid()[FUNCTION:String]",
-        "Log[VARIABLE:Log]",
-        "Log.info(\u0027\u0027)[FUNCTION:void:2]",
-        "Log.debug(\u0027\u0027)[FUNCTION:void:2]",
-        "Log.warn(\u0027\u0027)[FUNCTION:void:2]",
-        "Log.error(\u0027\u0027)[FUNCTION:void:2]",
-        "Log.trace(\u0027\u0027)[FUNCTION:void:2]",
-        "Config[VARIABLE:Config]",
-        "Config.getString(\u0027\u0027)[FUNCTION:String:2]",
-        "Config.getStringWithDefault(\u0027\u0027,\u0027\u0027)[FUNCTION:String:5]",
-        "Config.getInt(\u0027\u0027)[FUNCTION:String:2]",
-        "Config.getIntWithDefault(\u0027\u0027,5)[FUNCTION:String:3]",
-        "Config.getLong(\u0027\u0027)[FUNCTION:String:2]",
-        "Config.getLongWithDefault(\u0027\u0027,5)[FUNCTION:String:3]",
-        "Config.getDouble(\u0027\u0027)[FUNCTION:String:2]",
-        "Config.getDoubleWithDefault(\u0027\u0027,5)[FUNCTION:String:5]",
-        "Config.getFloat(\u0027\u0027)[FUNCTION:String:2]",
-        "Config.getFloatWithDefault(\u0027\u0027,5)[FUNCTION:String:5]",
-        "Config.getBoolean(\u0027\u0027)[FUNCTION:String:2]",
-        "Config.getBooleanWithDefault(\u0027\u0027,true)[FUNCTION:String:7]"
-      ]
+      "type": "Config",
+      "token": "Config",
+      "returnType": "Config",
+      "description": "Functions to retrieve runtime configuration data",
+      "replaceValue": "Config",
+      "cursorOffset": 0,
+      "itemType": "VARIABLE"
+    },
+    {
+      "type": "Config",
+      "token": "getString",
+      "returnType": "String",
+      "description": "Returns a config value from the given key as String type",
+      "replaceValue": "getString(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getStringWithDefault",
+      "returnType": "String",
+      "description": "Returns a config value from the given key as String type if present, otherwise the provided default value is returned.",
+      "replaceValue": "getStringWithDefault(\u0027\u0027,\u0027\u0027)",
+      "cursorOffset": 5,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getInt",
+      "returnType": "int",
+      "description": "Returns a config value from the given key as int type",
+      "replaceValue": "getInt(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getIntWithDefault",
+      "returnType": "int",
+      "description": "Returns a config value from the given key as int type, otherwise the provided default value is returned",
+      "replaceValue": "getIntWithDefault(\u0027\u0027,5)",
+      "cursorOffset": 4,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getLong",
+      "returnType": "long",
+      "description": "Returns a config value from the given key as long type",
+      "replaceValue": "getLong(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getLongWithDefault",
+      "returnType": "long",
+      "description": "Returns a config value from the given key as long type, otherwise the provided default value is returned",
+      "replaceValue": "getLongWithDefault(\u0027\u0027,5)",
+      "cursorOffset": 4,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getDouble",
+      "returnType": "double",
+      "description": "Returns a config value from the given key as double type",
+      "replaceValue": "getDouble(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getDoubleWithDefault",
+      "returnType": "double",
+      "description": "Returns a config value from the given key as double type, otherwise the provided default value is returned",
+      "replaceValue": "getDoubleWithDefault(\u0027\u0027,0.0)",
+      "cursorOffset": 6,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getFloat",
+      "returnType": "float",
+      "description": "Returns a config value from the given key as float type",
+      "replaceValue": "getFloat(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getFloatWithDefault",
+      "returnType": "float",
+      "description": "Returns a config value from the given key as float type, otherwise the provided default value is returned",
+      "replaceValue": "getFloatWithDefault(\u0027\u0027,0.0)",
+      "cursorOffset": 6,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getBoolean",
+      "returnType": "boolean",
+      "description": "Returns a config value from the given key as boolean type",
+      "replaceValue": "getBoolean(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Config",
+      "token": "getBooleanWithDefault",
+      "returnType": "boolean",
+      "description": "Returns a config value from the given key as boolean type, otherwise the provided default value is returned",
+      "replaceValue": "getBooleanWithDefault(\u0027\u0027,true)",
+      "cursorOffset": 7,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Log",
+      "token": "Log",
+      "returnType": "Log",
+      "description": "Functions to log from script functions",
+      "replaceValue": "Log",
+      "cursorOffset": 0,
+      "itemType": "VARIABLE"
+    },
+    {
+      "type": "Log",
+      "token": "info",
+      "returnType": "void",
+      "description": "Logs a message with INFO level",
+      "replaceValue": "info(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Log",
+      "token": "warn",
+      "returnType": "void",
+      "description": "Logs a message with WARN level",
+      "replaceValue": "warn(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Log",
+      "token": "error",
+      "returnType": "void",
+      "description": "Logs a message with ERROR level",
+      "replaceValue": "error(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Log",
+      "token": "trace",
+      "returnType": "void",
+      "description": "Logs a message with TRACE level",
+      "replaceValue": "trace(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Log",
+      "token": "debug",
+      "returnType": "void",
+      "description": "Logs a message with DEBUG level",
+      "replaceValue": "debug(\u0027\u0027)",
+      "cursorOffset": 2,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Util",
+      "token": "Util",
+      "returnType": "Util",
+      "description": "Collection of utility functions",
+      "replaceValue": "Util",
+      "cursorOffset": 0,
+      "itemType": "VARIABLE"
+    },
+    {
+      "type": "Util",
+      "token": "tmpdir",
+      "returnType": "String",
+      "description": "Returns the java tmp directory",
+      "replaceValue": "tmpdir()",
+      "cursorOffset": 0,
+      "itemType": "FUNCTION"
+    },
+    {
+      "type": "Util",
+      "token": "uuid",
+      "returnType": "String",
+      "description": "Return a random UUID",
+      "replaceValue": "uuid()",
+      "cursorOffset": 0,
+      "itemType": "FUNCTION"
     }
   ]
 }
