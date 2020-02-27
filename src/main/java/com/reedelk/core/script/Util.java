@@ -7,7 +7,7 @@ import com.reedelk.runtime.api.autocomplete.AutocompleteItemType;
 import java.util.UUID;
 
 @AutocompleteType
-@AutocompleteItem(token = "Util", itemType = AutocompleteItemType.VARIABLE, replaceValue = "Util", returnType = "Util", description = "Collection of utility functions")
+@AutocompleteItem(token = "Util", itemType = AutocompleteItemType.VARIABLE, replaceValue = "Util", returnType = Util.class, description = "Collection of utility functions")
 public class Util {
 
     @AutocompleteItem(replaceValue = "tmpdir()", description = "Returns the java tmp directory")

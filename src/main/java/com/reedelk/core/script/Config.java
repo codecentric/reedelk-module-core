@@ -5,8 +5,10 @@ import com.reedelk.runtime.api.annotation.AutocompleteType;
 import com.reedelk.runtime.api.autocomplete.AutocompleteItemType;
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 
+import static com.reedelk.runtime.api.autocomplete.AutocompleteItemType.*;
+
 @AutocompleteType
-@AutocompleteItem(token = "Config", itemType = AutocompleteItemType.VARIABLE, replaceValue = "Config", returnType = "Config", description = "Functions to retrieve runtime configuration data")
+@AutocompleteItem(token = "Config", itemType = VARIABLE, replaceValue = "Config", returnType = Config.class, description = "Functions to retrieve runtime configuration data.")
 public class Config {
 
     private final ConfigurationService configurationService;

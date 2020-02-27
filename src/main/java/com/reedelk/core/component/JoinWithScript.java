@@ -34,8 +34,8 @@ public class JoinWithScript implements Join {
     @Property("Script")
     @Example("joiners/joinByType.js")
     @ScriptSignature(arguments = {"context","messages"})
-    @AutocompleteVariable(name = "context", type = FlowContext.TYPE)
-    @AutocompleteVariable(name = "messages", type = Message.TYPE_ARRAY)
+    @AutocompleteVariable(name = "context", type = FlowContext.class)
+    @AutocompleteVariable(name = "messages", type = Message[].class)
     @Description("The path of the Javascript function to be invoked when executing the component")
     private Script script;
 
