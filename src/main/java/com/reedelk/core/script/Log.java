@@ -5,11 +5,8 @@ import com.reedelk.runtime.api.annotation.AutocompleteType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.reedelk.runtime.api.autocomplete.AutocompleteItemType.VARIABLE;
 
-
-@AutocompleteType
-@AutocompleteItem(token = "Log", itemType = VARIABLE, replaceValue = "Log", returnType = Log.class, description = "Functions to log from script functions")
+@AutocompleteType(global = true, description = "Functions to log from script functions")
 public class Log {
 
     private static final Logger logger = LoggerFactory.getLogger(Log.class);

@@ -2,13 +2,9 @@ package com.reedelk.core.script;
 
 import com.reedelk.runtime.api.annotation.AutocompleteItem;
 import com.reedelk.runtime.api.annotation.AutocompleteType;
-import com.reedelk.runtime.api.autocomplete.AutocompleteItemType;
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 
-import static com.reedelk.runtime.api.autocomplete.AutocompleteItemType.*;
-
-@AutocompleteType
-@AutocompleteItem(token = "Config", itemType = VARIABLE, replaceValue = "Config", returnType = Config.class, description = "Functions to retrieve runtime configuration data.")
+@AutocompleteType(global = true, description = "Functions to retrieve runtime configuration data.")
 public class Config {
 
     private final ConfigurationService configurationService;
