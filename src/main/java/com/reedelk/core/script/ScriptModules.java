@@ -27,9 +27,9 @@ public class ScriptModules implements ScriptSource {
     @Override
     public Map<String, Object> bindings() {
         Map<String, Object> bindings = new HashMap<>();
-        bindings.put("util", util);
-        bindings.put("logger", log);
-        bindings.put("config", config);
+        bindings.put("Log", log);
+        bindings.put("Util", util);
+        bindings.put("Config", config);
         return bindings;
     }
 
