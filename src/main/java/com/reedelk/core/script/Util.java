@@ -8,12 +8,12 @@ import java.util.UUID;
 @AutocompleteType(global = true, description = "Collection of utility functions")
 public class Util {
 
-    @AutocompleteItem(replaceValue = "tmpdir()", description = "Returns the java tmp directory")
+    @AutocompleteItem(signature = "tmpdir()", description = "Returns the java tmp directory")
     public String tmpdir() {
         return System.getProperty("java.io.tmpdir");
     }
 
-    @AutocompleteItem(replaceValue = "uuid()", description = "Return a random UUID")
+    @AutocompleteItem(signature = "uuid()", description = "Return a random UUID")
     public String uuid() {
         return UUID.randomUUID().toString();
     }
