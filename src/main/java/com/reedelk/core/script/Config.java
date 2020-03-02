@@ -16,7 +16,7 @@ public class Config {
 
     // String
 
-    @AutocompleteItem(replaceValue = "getString('')", cursorOffset = 2, description = "Returns a config value from the given key as String type")
+    @AutocompleteItem(replaceValue = "getString('')", cursorOffset = 2, example = "Config.getString('endpoint.host')", description = "Returns a config value from the given key as String type")
     public String getString(String configKey) {
         return configurationService.getString(configKey);
     }
