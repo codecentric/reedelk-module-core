@@ -5,15 +5,23 @@ import com.reedelk.runtime.api.annotation.AutocompleteType;
 
 import java.util.UUID;
 
-@AutocompleteType(global = true, description = "Collection of utility functions")
+@AutocompleteType(global = true,
+        description = "The Util type provides a set of utility functions such " +
+                "as generating uuids or getting temporary directory on the file system.")
 public class Util {
 
-    @AutocompleteItem(signature = "tmpdir()", description = "Returns the java tmp directory")
+    @AutocompleteItem(
+            signature = "tmpdir()",
+            example = "Util.tmpdir()",
+            description = "Returns a temporary directory which can be used to temporarily create and store files.")
     public String tmpdir() {
         return System.getProperty("java.io.tmpdir");
     }
 
-    @AutocompleteItem(signature = "uuid()", description = "Return a random UUID")
+    @AutocompleteItem(
+            signature = "uuid()",
+            example = "Util.uuid()",
+            description = "Returns a type 4 (pseudo randomly generated) uuid.")
     public String uuid() {
         return UUID.randomUUID().toString();
     }

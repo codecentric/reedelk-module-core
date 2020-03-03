@@ -1,47 +1,47 @@
 package com.reedelk.core.commons;
 
-import com.reedelk.core.component.LoggerComponent;
 import com.reedelk.runtime.api.annotation.DisplayName;
+import org.slf4j.Logger;
 
 public enum LoggerLevel implements MessageLogger {
 
     @DisplayName("Info")
     INFO {
         @Override
-        public void log(Object message) {
-            LoggerComponent.logger.info(asLoggableString(message));
+        public void log(Logger logger, Object message) {
+            logger.info(asLoggableString(message));
         }
     },
 
     @DisplayName("Debug")
     DEBUG {
         @Override
-        public void log(Object message) {
-            LoggerComponent.logger.debug(asLoggableString(message));
+        public void log(Logger logger, Object message) {
+            logger.debug(asLoggableString(message));
         }
     },
 
     @DisplayName("Warn")
     WARN {
         @Override
-        public void log(Object message) {
-            LoggerComponent.logger.warn(asLoggableString(message));
+        public void log(Logger logger, Object message) {
+            logger.warn(asLoggableString(message));
         }
     },
 
     @DisplayName("Error")
     ERROR {
         @Override
-        public void log(Object message) {
-            LoggerComponent.logger.error(asLoggableString(message));
+        public void log(Logger logger, Object message) {
+            logger.error(asLoggableString(message));
         }
     },
 
     @DisplayName("Trace")
     TRACE {
         @Override
-        public void log(Object message) {
-            LoggerComponent.logger.trace(asLoggableString(message));
+        public void log(Logger logger, Object message) {
+            logger.trace(asLoggableString(message));
         }
     };
 

@@ -5,7 +5,7 @@ import com.reedelk.runtime.api.annotation.AutocompleteType;
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 
 @AutocompleteType(global = true, description =
-        "The Config function provides a set of methods to retrieve " +
+        "The Config type provides a set of functions to retrieve " +
                 "configuration properties given a config key and (optionally) a default value. " +
                 "Configuration properties must be defined in the <i>{RUNTIME_HOME}/config/configuration.properties</i> file.")
 public class Config {
