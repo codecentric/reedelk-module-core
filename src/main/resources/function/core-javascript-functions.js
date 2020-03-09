@@ -38,7 +38,9 @@ var Util = {};
         // Merge the object into the extended object
         var extend = function (obj) {
             for (var prop in obj) {
-                if (obj.hasOwnProperty(prop)) {
+                // If the object has 'hasOwnProperty' we use it, otherwise the object
+                // is a Java Map type, therefore we don't use it.
+                if (obj.hasOwnProperty ? obj.hasOwnProperty(prop): true) {
                     if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
                         // If we're doing a deep merge and the property is an object
                         extended[prop] = Util.merge(true, extended[prop], obj[prop]);

@@ -2,6 +2,7 @@ package com.reedelk.core.script;
 
 import com.reedelk.runtime.api.commons.FileUtils;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -14,6 +15,7 @@ import java.util.*;
 
 import static java.util.Arrays.*;
 import static javax.script.ScriptContext.ENGINE_SCOPE;
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unchecked")
@@ -118,6 +120,31 @@ class UtilTest extends AbstractScriptEngineTest {
 
             String[] twoKeys = two.getOwnKeys(true);
             assertThat(twoKeys).containsExactly("a");
+        }
+
+        @Test
+        void shouldMergePropertiesFromHashMap() throws ScriptException {
+            // Given
+            Map<String,Object> map1 = new HashMap<>();
+            map1.put("key1", "value 1");
+            Map<String,Object> map2 = new HashMap<>();
+            map2.put("key2", "value 2");
+            map2.put("key3", "value 3");
+
+            Bindings collectionBindings = engine.getBindings(ENGINE_SCOPE);
+            collectionBindings.put("map1", map1);
+            collectionBindings.put("map2", map2);
+
+            // When
+            String script = "Util.merge(map1, map2)";
+            ScriptObjectMirror result = (ScriptObjectMirror) engine.eval(script, collectionBindings);
+
+            // Then
+            assertThat(result).hasSize(3);
+
+            assertThat(result.get("key1")).isEqualTo("value 1");
+            assertThat(result.get("key2")).isEqualTo("value 2");
+            assertThat(result.get("key3")).isEqualTo("value 3");
         }
     }
 
@@ -239,7 +266,6 @@ class UtilTest extends AbstractScriptEngineTest {
             HashMap<String,Object> o3 = (HashMap<String,Object>) c1Group.get("1");
             assertThat(o3.get("p1")).isEqualTo("c1");
             assertThat(o3.get("p3")).isEqualTo("p3 value");
-
 
             ScriptObjectMirror c2Group = (ScriptObjectMirror) result.get("c2"); // second group
             assertThat(c2Group).hasSize(1);
