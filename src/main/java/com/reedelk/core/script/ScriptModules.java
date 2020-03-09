@@ -12,10 +12,13 @@ import static java.util.Collections.unmodifiableList;
 
 public class ScriptModules implements ScriptSource {
 
+    public static String SCRIPT_RESOURCE_PATH = "/function/core-javascript-functions.js";
+
     private final long moduleId;
-    private final Config config;
+
     private final Log log;
     private final Util util;
+    private final Config config;
 
     public ScriptModules(long moduleId, ConfigurationService configurationService) {
         this.moduleId = moduleId;
@@ -28,7 +31,7 @@ public class ScriptModules implements ScriptSource {
     public Map<String, Object> bindings() {
         Map<String, Object> bindings = new HashMap<>();
         bindings.put("Log", log);
-        bindings.put("Util", util);
+        bindings.put("util", util);
         bindings.put("Config", config);
         return bindings;
     }
@@ -45,6 +48,6 @@ public class ScriptModules implements ScriptSource {
 
     @Override
     public String resource() {
-        return "/function/core-javascript-functions.js";
+        return SCRIPT_RESOURCE_PATH;
     }
 }
