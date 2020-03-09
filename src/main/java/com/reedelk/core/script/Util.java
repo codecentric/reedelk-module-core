@@ -11,15 +11,15 @@ import java.util.UUID;
 @AutocompleteItem(
         cursorOffset = 1,
         token = "merge",
-        signature = "merge([deep], object1 [, objectN])",
+        signature = "merge([deep], object1[, objectN])",
         example = "Util.merge(obj1, obj2, obj3)",
         description = "Merge the contents of two or more objects together into a new object. " +
                 "If the optional argument deep is true, the merge becomes recursive (aka. deep copy).")
 @AutocompleteItem(
         cursorOffset = 1,
         token = "groupBy",
-        signature = "groupBy(array,function)",
-        example = "Util.groupBy([1,2,3], function(a,b) { return a; })",
+        signature = "groupBy(array, criteria)",
+        example = "Util.groupBy([{p1: 'c1'}, {p1: 'c2'}, {p1: 'c1'}], 'p1')",
         description = "Groups the object’s values by a criterion. " +
                 "Pass either a string attribute to group by, or a function that returns the criterion.")
 public class Util {

@@ -2,7 +2,6 @@ package com.reedelk.core.script;
 
 import com.reedelk.runtime.api.commons.FileUtils;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -11,11 +10,13 @@ import org.junit.jupiter.api.Test;
 import javax.script.Bindings;
 import javax.script.ScriptException;
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 import static javax.script.ScriptContext.ENGINE_SCOPE;
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unchecked")
