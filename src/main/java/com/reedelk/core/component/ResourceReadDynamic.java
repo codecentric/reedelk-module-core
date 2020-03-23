@@ -36,6 +36,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 public class ResourceReadDynamic extends ResourceReadComponent implements ProcessorSync {
 
     @Property("Resource file")
+    @Hint("/assets/sample.jpg")
     @InitValue("#['/assets/sample.jpg']")
     @Example("<code>message.attributes().get('pathParams').filePathParam</code>")
     @Description("The path and name of the file to be read from the project's resources folder. " +
