@@ -20,6 +20,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
                 "<br>" +
                 "<br>" +
                 "<pre><code> function myFunctionName(context,message) {<br>   // Function code<br>   return 'my result';<br> }<br></code></pre>" +
+                "<br>" +
                 "The <i>context</i> variable can be used to access data stored in the flow context and the <i>message</i> variable is the current flow message object. " +
                 "To access the message content from the script use <code>message.payload()</code>.")
 @Component(service = ScriptEvaluator.class, scope = PROTOTYPE)

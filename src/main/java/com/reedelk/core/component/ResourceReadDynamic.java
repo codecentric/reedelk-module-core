@@ -60,6 +60,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
     @Description("The mime type of the resource read from local project's resources directory.")
     private String mimeType;
 
+    @Group("Advanced")
     @Property("Configuration")
     private ResourceReadDynamicConfiguration configuration;
 
