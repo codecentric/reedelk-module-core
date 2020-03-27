@@ -29,6 +29,7 @@ public class PayloadSet implements ProcessorSync {
     private String mimeType;
 
     @Property("Payload")
+    @Hint("Payload text")
     @InitValue("#[]")
     @Example("<code>JSON.stringify({ data: message.payload(), id: Util.uuid() }</code>")
     @Description("The new payload to be set to the current flow message.")
