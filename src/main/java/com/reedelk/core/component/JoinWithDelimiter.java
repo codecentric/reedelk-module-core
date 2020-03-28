@@ -29,7 +29,7 @@ public class JoinWithDelimiter implements Join {
     @MimeTypeCombo
     @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
     @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
-    @Description("Sets the mime type of the joined content in the message")
+    @Description("Sets the mime type of the joined content in the message.")
     private String mimeType;
 
     @Property("Delimiter")
