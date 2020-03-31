@@ -28,6 +28,7 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
 
     @Property("Resource file")
     @Example("assets/my_image.jpg")
+    @HintBrowseFile("Select Resource Binary File ...")
     @Description("The path and name of the file to be read from the project's resources folder.")
     private ResourceBinary resourceFile;
 

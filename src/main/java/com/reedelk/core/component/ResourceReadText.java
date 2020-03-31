@@ -25,6 +25,7 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
     @Property("Resource file")
     @Hint("assets/sample.txt")
     @Example("assets/data_model.json")
+    @HintBrowseFile("Select Resource Text File ...")
     @Description("The path and name of the file to be read from the project's resources folder.")
     private ResourceText resourceFile;
 
