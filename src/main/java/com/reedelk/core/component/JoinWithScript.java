@@ -16,7 +16,7 @@ import java.util.Optional;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-@ModuleComponent("Join Script")
+@ModuleComponent("Join With Script")
 @Description("Can only be placed after a Fork. It joins the payloads of the messages resulting " +
                 "from the execution of the Fork with the provided Javascript function. " +
                 "The mime type property specifies the mime type of the joined payloads. " +
