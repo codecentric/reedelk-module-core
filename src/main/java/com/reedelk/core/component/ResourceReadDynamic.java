@@ -1,7 +1,6 @@
 package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
-import com.reedelk.runtime.api.commons.JavaType;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.exception.ESBException;
@@ -88,7 +87,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
             MimeType actualMimeType = mimeTypeFrom(autoMimeType, mimeType, resourceFilePath, MimeType.APPLICATION_BINARY);
 
             // Convert the payload to a suitable type according to the mime type.
-            if (String.class == JavaType.from(actualMimeType)) {
+            if (String.class == actualMimeType.javaType()) {
                 TypedPublisher<String> streamAsString =
                         converterService.convert(TypedPublisher.fromByteArray(dataStream), String.class);
 
