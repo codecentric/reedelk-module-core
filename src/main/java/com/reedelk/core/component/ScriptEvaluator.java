@@ -8,9 +8,11 @@ import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.script.Script;
 import com.reedelk.runtime.api.script.ScriptEngineService;
+import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import static com.reedelk.runtime.api.commons.StringUtils.isNotBlank;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Script")
@@ -45,6 +47,14 @@ public class ScriptEvaluator implements ProcessorSync {
             "Must be a file path and name starting from the project's resources/scripts directory.")
     private Script script;
 
+    @Property("Target Variable")
+    @Hint("myScriptResult")
+    @Example("myScriptResult")
+    @Group("Advanced")
+    @Description("If the property is not empty, the result of the script evaluation is assigned to the given context" +
+            " variable instead of the message payload.")
+    private DynamicString target;
+
     @Reference
     private ScriptEngineService service;
 
@@ -55,9 +65,18 @@ public class ScriptEvaluator implements ProcessorSync {
 
         Object evaluated = service.evaluate(script, Object.class, flowContext, message).orElse(null);
 
-        return MessageBuilder.get()
-                .withJavaObject(evaluated, mimeType)
-                .build();
+        // If the target variable has been set, we assign to a context variable
+        // the result of the Script evaluation and we return the original message.
+        if (target != null && isNotBlank(target.value())) {
+            service.evaluate(target, flowContext, message)
+                    .ifPresent(contextVariableName -> flowContext.put(contextVariableName, evaluated));
+            return message;
+
+        } else {
+            return MessageBuilder.get()
+                    .withJavaObject(evaluated, mimeType)
+                    .build();
+        }
     }
 
     public void setScript(Script script) {
@@ -66,5 +85,13 @@ public class ScriptEvaluator implements ProcessorSync {
 
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
+    }
+
+    public DynamicString getTarget() {
+        return target;
+    }
+
+    public void setTarget(DynamicString target) {
+        this.target = target;
     }
 }

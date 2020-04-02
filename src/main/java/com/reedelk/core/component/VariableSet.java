@@ -12,12 +12,10 @@ import com.reedelk.runtime.api.script.dynamicvalue.DynamicObject;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.io.Serializable;
-
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Variable Set")
-@Description("Sets a variable in the flow context with the provided value. The assigned value must be serializable.")
+@Description("Sets a variable in the flow context with the provided value.")
 @Component(service = VariableSet.class, scope = PROTOTYPE)
 public class VariableSet implements ProcessorSync {
 
@@ -53,7 +51,7 @@ public class VariableSet implements ProcessorSync {
 
         MimeType mimeType = MimeType.parse(this.mimeType, MimeType.ANY);
 
-        Serializable result = (Serializable) scriptEngine.evaluate(value, mimeType, flowContext, message).orElse(null);
+        Object result = scriptEngine.evaluate(value, mimeType, flowContext, message).orElse(null);
 
         flowContext.put(name, result);
 
