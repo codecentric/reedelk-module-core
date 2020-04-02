@@ -47,7 +47,7 @@ public class JoinWithDelimiter implements Join {
         // Join with delimiter supports joins of only string data types.
         String combinedPayload = messagesToJoin.stream()
                 .map(message -> {
-                    Object messageData = message.content().data();
+                    Object messageData = message.payload();
                     return converterService.convert(messageData, String.class);
                 })
                 .collect(Collectors.joining(delimiter));
