@@ -3,13 +3,13 @@ package com.reedelk.core.component;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.commons.StringUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
-import com.reedelk.runtime.api.exception.ESBException;
+import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.MessageBuilder;
-import com.reedelk.runtime.api.message.content.StringContent;
 import com.reedelk.runtime.api.message.content.TypedContent;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,27 +31,33 @@ public class SplitText implements ProcessorSync {
     @Description("The delimiter to be used to split the message payload. A regular expression can be used.")
     private String delimiter;
 
+    @Reference
+    private ConverterService converterService;
+
     @Override
     public Message apply(FlowContext flowContext, Message message) {
         TypedContent<?, ?> content = message.content();
 
-        if (content instanceof StringContent) {
-            String payloadAsString = message.payload();
-
-            List<String> segments;
-            if (StringUtils.isNull(payloadAsString)) {
-                segments = new ArrayList<>();
-            } else {
-                String[] split = payloadAsString.split(delimiter);
-                segments = Arrays.asList(split);
-            }
-
+        if (content == null) {
             return MessageBuilder.get()
-                    .withJavaCollection(segments, String.class)
+                    .withJavaCollection(new ArrayList<>(), String.class)
                     .build();
+
         }
 
-        throw new ESBException(String.format("Message payload must be of type=['%s']", StringContent.class.getSimpleName()));
+        String payloadAsString = converterService.convert(content.data(), String.class);
+
+        List<String> segments;
+        if (StringUtils.isBlank(payloadAsString)) {
+            segments = new ArrayList<>();
+        } else {
+            String[] split = payloadAsString.split(delimiter);
+            segments = Arrays.asList(split);
+        }
+
+        return MessageBuilder.get()
+                .withJavaCollection(segments, String.class)
+                .build();
     }
 
     public String getDelimiter() {
