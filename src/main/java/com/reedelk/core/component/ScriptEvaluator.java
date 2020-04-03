@@ -1,6 +1,7 @@
 package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.DynamicValueUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
@@ -12,7 +13,6 @@ import com.reedelk.runtime.api.script.dynamicvalue.DynamicString;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import static com.reedelk.runtime.api.commons.StringUtils.isNotBlank;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Script")
@@ -67,9 +67,10 @@ public class ScriptEvaluator implements ProcessorSync {
 
         // If the target variable has been set, we assign to a context variable
         // the result of the Script evaluation and we return the original message.
-        if (target != null && isNotBlank(target.value())) {
+        if (DynamicValueUtils.isNotNullOrBlank(target)) {
             service.evaluate(target, flowContext, message)
-                    .ifPresent(contextVariableName -> flowContext.put(contextVariableName, evaluated));
+                    .ifPresent(contextVariableName ->
+                            flowContext.put(contextVariableName, evaluated));
             return message;
 
         } else {
