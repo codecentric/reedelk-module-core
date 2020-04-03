@@ -11,17 +11,17 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Join With Delimiter")
 @Description("Can only be placed after a Fork. It joins the payloads of the messages resulting " +
-                "from the execution of the Fork with the provided delimiter. " +
-                "A delimiter can be a single character or any other string. " +
-                "The mime type property specifies the mime type of the joined payloads. " +
-                "This component automatically converts the payload of each single input message to string " +
-                "in case they are not a string type already.")
+        "from the execution of the Fork with the provided delimiter. " +
+        "A delimiter can be a single character or any other string. " +
+        "The mime type property specifies the mime type of the joined payloads. " +
+        "This component automatically converts the payload of each single input message to string " +
+        "in case they are not a string type already.")
 @Component(service = JoinWithDelimiter.class, scope = PROTOTYPE)
 public class JoinWithDelimiter implements Join {
 
@@ -45,12 +45,11 @@ public class JoinWithDelimiter implements Join {
     public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {
 
         // Join with delimiter supports joins of only string data types.
-        String combinedPayload = messagesToJoin.stream()
-                .map(message -> {
-                    Object messageData = message.payload();
-                    return converterService.convert(messageData, String.class);
-                })
-                .collect(Collectors.joining(delimiter));
+        // This is why we convert the messages payloads into a string type.
+        String combinedPayload = messagesToJoin.stream().map(message -> {
+            Object messageData = message.payload();
+            return converterService.convert(messageData, String.class);
+        }).collect(joining(delimiter));
 
         MimeType mimeType = MimeType.parse(this.mimeType);
 
