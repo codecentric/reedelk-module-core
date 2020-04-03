@@ -44,7 +44,7 @@ class ResourceReadBinaryTest {
         // Given
         Flux<byte[]> byteStream = Flux.just("one".getBytes(), "two".getBytes());
         ResourceBinary resourceBinary = new TestResourceBinary("assets/img/donkey.jpg", byteStream);
-        component.setMimeType(MimeType.MIME_TYPE_APPLICATION_BINARY);
+        component.setMimeType(MimeType.AsString.APPLICATION_BINARY);
         component.setAutoMimeType(true);
         component.setResourceFile(resourceBinary);
 
@@ -71,7 +71,7 @@ class ResourceReadBinaryTest {
         // Given
         Flux<byte[]> byteStream = Flux.just("one".getBytes(), "two".getBytes());
         ResourceBinary resourceBinary = new TestResourceBinary("assets/css/style.css", byteStream);
-        component.setMimeType(MimeType.MIME_TYPE_TEXT_PLAIN);
+        component.setMimeType(MimeType.AsString.TEXT_PLAIN);
         component.setAutoMimeType(true);
         component.setResourceFile(resourceBinary);
 

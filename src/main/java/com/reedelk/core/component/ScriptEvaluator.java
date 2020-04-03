@@ -31,9 +31,8 @@ public class ScriptEvaluator implements ProcessorSync {
 
     @Property("Mime type")
     @MimeTypeCombo
-    @Example(MimeType.MIME_TYPE_TEXT_XML)
-    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
-    @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Example(MimeType.AsString.TEXT_XML)
+    @DefaultValue(MimeType.AsString.TEXT_PLAIN)
     @Description("Sets the mime type of the script result in the message payload; " +
             "e.g: if the result of the script is JSON, then <i>application/json</i> should be selected." +
             "This is useful to let the following components in the flow know how to process the message payload set " +

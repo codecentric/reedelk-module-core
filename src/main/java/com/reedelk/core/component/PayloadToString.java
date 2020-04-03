@@ -26,8 +26,8 @@ public class PayloadToString implements ProcessorSync {
 
     @Property("Mime Type")
     @MimeTypeCombo
-    @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
-    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
+    @DefaultValue(MimeType.AsString.TEXT_PLAIN)
+    @Example(MimeType.AsString.APPLICATION_JSON)
     @Description("Sets the new mime type of the payload content.")
     private String mimeType;
 

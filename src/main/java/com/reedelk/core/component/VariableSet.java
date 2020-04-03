@@ -27,8 +27,8 @@ public class VariableSet implements ProcessorSync {
 
     @Property("Mime type")
     @MimeTypeCombo
-    @DefaultValue(MimeType.MIME_TYPE_ANY)
-    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
+    @DefaultValue(MimeType.AsString.ANY)
+    @Example(MimeType.AsString.APPLICATION_JSON)
     @Description("The mime type of the value this context variable will be bound to.")
     private String mimeType;
 

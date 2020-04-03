@@ -38,9 +38,8 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
 
     @Property("Mime type")
     @MimeTypeCombo
-    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
-    @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
-    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @Example(MimeType.AsString.APPLICATION_JSON)
+    @DefaultValue(MimeType.AsString.TEXT_PLAIN)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
     @Description("The mime type of the resource read from local project's resources directory.")

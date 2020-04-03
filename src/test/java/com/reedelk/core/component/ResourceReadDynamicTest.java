@@ -49,7 +49,7 @@ class ResourceReadDynamicTest {
     void shouldNotConvertContentWhenBinaryMimeType() {
         // Given
         component.setAutoMimeType(true);
-        component.setMimeType(MimeType.MIME_TYPE_APPLICATION_BINARY);
+        component.setMimeType(MimeType.AsString.APPLICATION_BINARY);
         component.setResourceFile(dynamicResource);
         component.initialize();
 
@@ -72,7 +72,7 @@ class ResourceReadDynamicTest {
     void shouldConvertContentWhenTextPlainMimeType() {
         // Given
         component.setAutoMimeType(true);
-        component.setMimeType(MimeType.MIME_TYPE_TEXT_PLAIN);
+        component.setMimeType(MimeType.AsString.TEXT_PLAIN);
         component.setResourceFile(dynamicResource);
         component.initialize();
 

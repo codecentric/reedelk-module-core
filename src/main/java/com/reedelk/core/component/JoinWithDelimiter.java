@@ -27,8 +27,8 @@ public class JoinWithDelimiter implements Join {
 
     @Property("Mime type")
     @MimeTypeCombo
-    @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
-    @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
+    @DefaultValue(MimeType.AsString.TEXT_PLAIN)
+    @Example(MimeType.AsString.APPLICATION_JSON)
     @Description("Sets the mime type of the joined content in the message.")
     private String mimeType;
 

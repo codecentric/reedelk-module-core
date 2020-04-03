@@ -40,8 +40,8 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
 
     @Property("Mime type")
     @MimeTypeCombo
-    @Example(MimeType.MIME_TYPE_IMAGE_JPEG)
-    @DefaultValue(MimeType.MIME_TYPE_APPLICATION_BINARY)
+    @Example(MimeType.AsString.IMAGE_JPEG)
+    @DefaultValue(MimeType.AsString.APPLICATION_BINARY)
     @When(propertyName = "autoMimeType", propertyValue = "false")
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
     @Description("The mime type of the resource read from local project's resources directory.")
