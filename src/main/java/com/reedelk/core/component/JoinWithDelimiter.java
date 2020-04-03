@@ -27,8 +27,8 @@ public class JoinWithDelimiter implements Join {
 
     @Property("Mime type")
     @MimeTypeCombo
+    @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
-    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @Description("Sets the mime type of the joined content in the message.")
     private String mimeType;
 
@@ -51,7 +51,7 @@ public class JoinWithDelimiter implements Join {
             return converterService.convert(messageData, String.class);
         }).collect(joining(delimiter));
 
-        MimeType mimeType = MimeType.parse(this.mimeType);
+        MimeType mimeType = MimeType.parse(this.mimeType, MimeType.TEXT_PLAIN);
 
         return MessageBuilder.get()
                 .withString(combinedPayload, mimeType)

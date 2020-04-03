@@ -53,7 +53,7 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
 
         String resourceFilePath = resourceFile.path();
 
-        MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath, MimeType.TEXT);
+        MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath, MimeType.TEXT_PLAIN);
 
         MessageAttributes attributes = createAttributes(ResourceReadText.class, resourceFilePath);
 

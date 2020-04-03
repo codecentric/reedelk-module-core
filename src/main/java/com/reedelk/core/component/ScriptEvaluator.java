@@ -61,7 +61,7 @@ public class ScriptEvaluator implements ProcessorSync {
     @Override
     public Message apply(FlowContext flowContext, Message message) {
 
-        MimeType mimeType = MimeType.parse(this.mimeType, MimeType.TEXT);
+        MimeType mimeType = MimeType.parse(this.mimeType, MimeType.TEXT_PLAIN);
 
         Object evaluated = service.evaluate(script, Object.class, flowContext, message).orElse(null);
 

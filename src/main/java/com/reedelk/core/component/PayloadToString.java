@@ -26,7 +26,7 @@ public class PayloadToString implements ProcessorSync {
 
     @Property("Mime Type")
     @MimeTypeCombo
-    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
     @Description("Sets the new mime type of the payload content.")
     private String mimeType;
@@ -39,7 +39,7 @@ public class PayloadToString implements ProcessorSync {
     @Override
     public void initialize() {
         requireNotBlank(PayloadToString.class, mimeType, "MimeType must not be empty");
-        this.wantedMimeType = MimeType.parse(mimeType);
+        this.wantedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
     }
 
     @Override

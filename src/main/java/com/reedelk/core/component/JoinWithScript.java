@@ -26,7 +26,7 @@ public class JoinWithScript implements Join {
 
     @Property("Mime type")
     @MimeTypeCombo
-    @InitValue(MimeType.MIME_TYPE_TEXT_PLAIN)
+    @DefaultValue(MimeType.MIME_TYPE_TEXT_PLAIN)
     @Example(MimeType.MIME_TYPE_APPLICATION_JSON)
     @Description("Sets the mime type of the joined content in the message.")
     private String mimeType;
@@ -46,7 +46,7 @@ public class JoinWithScript implements Join {
     public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {
         Optional<Object> result = service.evaluate(script, Object.class, flowContext, messagesToJoin);
         if (result.isPresent()) {
-            MimeType mimeType = MimeType.parse(this.mimeType);
+            MimeType mimeType = MimeType.parse(this.mimeType, MimeType.TEXT_PLAIN);
             return MessageBuilder.get()
                     .withJavaObject(result.get(), mimeType)
                     .build();
