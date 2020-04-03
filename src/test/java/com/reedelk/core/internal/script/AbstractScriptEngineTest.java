@@ -1,4 +1,4 @@
-package com.reedelk.core.script;
+package com.reedelk.core.internal.script;
 
 import org.junit.jupiter.api.BeforeAll;
 

@@ -1,6 +1,6 @@
-package com.reedelk.core;
+package com.reedelk.core.internal;
 
-import com.reedelk.core.script.ScriptModules;
+import com.reedelk.core.internal.script.ScriptModules;
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import org.osgi.framework.BundleContext;

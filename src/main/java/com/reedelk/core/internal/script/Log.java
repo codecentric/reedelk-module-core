@@ -1,6 +1,6 @@
-package com.reedelk.core.script;
+package com.reedelk.core.internal.script;
 
-import com.reedelk.core.commons.LoggerLevel;
+import com.reedelk.core.internal.commons.LoggerLevel;
 import com.reedelk.runtime.api.annotation.AutocompleteItem;
 import com.reedelk.runtime.api.annotation.AutocompleteType;
 import org.slf4j.Logger;

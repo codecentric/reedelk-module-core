@@ -1,4 +1,4 @@
-package com.reedelk.core.commons;
+package com.reedelk.core.internal.commons;
 
 import org.slf4j.Logger;
 

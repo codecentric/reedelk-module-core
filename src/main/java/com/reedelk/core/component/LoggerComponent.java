@@ -1,6 +1,6 @@
 package com.reedelk.core.component;
 
-import com.reedelk.core.commons.LoggerLevel;
+import com.reedelk.core.internal.commons.LoggerLevel;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.exception.ESBException;
