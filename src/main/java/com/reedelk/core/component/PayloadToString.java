@@ -47,7 +47,9 @@ public class PayloadToString implements ProcessorSync {
 
         TypedContent<?, ?> content = message.content();
         if (content.isStream()) {
-            // Content is not consumed.
+            // Content is not consumed we keep it as a stream
+            // by just converting each element emitted by the
+            // stream to a string.
             TypedPublisher<?> stream = content.stream();
             TypedPublisher<String> output = converterService.convert(stream, String.class);
             return MessageBuilder.get()
