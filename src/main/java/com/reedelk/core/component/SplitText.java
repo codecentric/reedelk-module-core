@@ -40,7 +40,7 @@ public class SplitText implements ProcessorSync {
 
         if (content == null) {
             return MessageBuilder.get()
-                    .withJavaCollection(new ArrayList<>(), String.class)
+                    .withList(new ArrayList<>(), String.class)
                     .build();
 
         }
@@ -56,7 +56,7 @@ public class SplitText implements ProcessorSync {
         }
 
         return MessageBuilder.get()
-                .withJavaCollection(segments, String.class)
+                .withList(segments, String.class)
                 .build();
     }
 
