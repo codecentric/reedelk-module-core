@@ -14,8 +14,6 @@ import org.osgi.service.component.annotations.Reference;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
-
-// TODO: Add check if key is null! So that the user knows what is going on!
 @ModuleComponent("Variable Set")
 @Description("Sets a variable in the flow context with the provided value.")
 @Component(service = VariableSet.class, scope = PROTOTYPE)
