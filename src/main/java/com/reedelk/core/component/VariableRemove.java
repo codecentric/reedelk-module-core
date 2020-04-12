@@ -1,12 +1,12 @@
 package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
-import com.reedelk.runtime.api.commons.StringUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import org.osgi.service.component.annotations.Component;
 
+import static com.reedelk.runtime.api.commons.ConfigurationPreconditions.requireNotBlank;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Variable Remove")
@@ -21,10 +21,15 @@ public class VariableRemove implements ProcessorSync {
     private String name;
 
     @Override
+    public void initialize() {
+        requireNotBlank(VariableRemove.class, name, "Variable name to remove must not be empty");
+    }
+
+    @Override
     public Message apply(FlowContext flowContext, Message message) {
-        if (StringUtils.isNotBlank(name)) {
-            flowContext.remove(name);
-        }
+
+        flowContext.remove(name);
+
         return message;
     }
 

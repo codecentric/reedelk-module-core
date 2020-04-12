@@ -3,7 +3,7 @@ package com.reedelk.core.component;
 import com.reedelk.core.internal.commons.LoggerLevel;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
-import com.reedelk.runtime.api.exception.ESBException;
+import com.reedelk.runtime.api.exception.PlatformException;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.script.ScriptEngineService;
@@ -57,8 +57,8 @@ public class LoggerComponent implements ProcessorSync {
             } else {
                 debug(message, flowContext);
             }
-        } catch (ScriptException e) {
-            throw new ESBException(e);
+        } catch (ScriptException exception) {
+            throw new PlatformException(exception);
         }
         return message;
     }

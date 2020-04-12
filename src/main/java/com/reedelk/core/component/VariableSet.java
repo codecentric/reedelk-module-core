@@ -1,9 +1,7 @@
 package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
-import com.reedelk.runtime.api.commons.StringUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
-import com.reedelk.runtime.api.exception.ESBException;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.content.MimeType;
@@ -12,6 +10,7 @@ import com.reedelk.runtime.api.script.dynamicvalue.DynamicObject;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import static com.reedelk.runtime.api.commons.ConfigurationPreconditions.requireNotBlank;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Variable Set")
@@ -43,10 +42,12 @@ public class VariableSet implements ProcessorSync {
     private ScriptEngineService scriptEngine;
 
     @Override
+    public void initialize() {
+        requireNotBlank(VariableSet.class, name, "Variable name to set must not be empty");
+    }
+
+    @Override
     public Message apply(FlowContext flowContext, Message message) {
-        if (StringUtils.isBlank(name)) {
-            throw new ESBException("Variable name must not be empty");
-        }
 
         MimeType mimeType = MimeType.parse(this.mimeType, MimeType.ANY);
 
