@@ -17,9 +17,9 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Join With Script")
 @Description("Can only be placed after a Fork. It joins the payloads of the messages resulting " +
-                "from the execution of the Fork with the provided Javascript function. " +
-                "The mime type property specifies the mime type of the joined payloads. " +
-                "If the result of the script is null, an empty message payload content is set.")
+        "from the execution of the Fork with the provided Javascript function. " +
+        "The mime type property specifies the mime type of the joined payloads. " +
+        "If the result of the script is null, an empty message payload content is set.")
 @Component(service = JoinWithScript.class, scope = PROTOTYPE)
 public class JoinWithScript implements Join {
 
@@ -32,7 +32,7 @@ public class JoinWithScript implements Join {
 
     @Property("Script")
     @Example("joiners/joinByType.js")
-    @ScriptSignature(arguments = {"context","messages"})
+    @ScriptSignature(arguments = {"context", "messages"})
     @AutocompleteVariable(name = "context", type = FlowContext.class)
     @AutocompleteVariable(name = "messages", type = Message[].class)
     @Description("The path of the Javascript function to be invoked when executing the component")
@@ -43,15 +43,15 @@ public class JoinWithScript implements Join {
 
     @Override
     public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {
-        return service.evaluate(script, Object.class, flowContext, messagesToJoin)
+        return service
+                .evaluate(script, Object.class, flowContext, messagesToJoin)
                 .map(result -> {
                     MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
-                    return MessageBuilder.get()
+                    return MessageBuilder.get(JoinWithScript.class)
                             .withJavaObject(result, parsedMimeType)
                             .build();
-                }).orElseGet(() -> MessageBuilder.get()
-                        .empty()
-                        .build());
+
+                }).orElseGet(() -> MessageBuilder.get(JoinWithScript.class).empty().build());
     }
 
     public void setScript(Script script) {
@@ -61,4 +61,5 @@ public class JoinWithScript implements Join {
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
+
 }

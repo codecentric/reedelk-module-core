@@ -51,10 +51,10 @@ public class JoinWithDelimiter implements Join {
             return converterService.convert(messageData, String.class);
         }).collect(joining(delimiter));
 
-        MimeType mimeType = MimeType.parse(this.mimeType, MimeType.TEXT_PLAIN);
+        MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
 
-        return MessageBuilder.get()
-                .withString(combinedPayload, mimeType)
+        return MessageBuilder.get(JoinWithDelimiter.class)
+                .withString(combinedPayload, parsedMimeType)
                 .build();
     }
 

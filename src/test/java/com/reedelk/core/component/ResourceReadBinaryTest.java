@@ -61,7 +61,7 @@ class ResourceReadBinaryTest {
                 .expectNextMatches(bytes -> Arrays.equals(bytes, "two".getBytes()))
                 .verifyComplete();
 
-        assertThat(result.attributes()).containsEntry("componentName", "ResourceReadText");
+        assertThat(result.attributes()).containsEntry("component", "com.reedelk.core.component.ResourceReadBinary");
         assertThat(result.attributes()).containsEntry("resourcePath", "assets/img/donkey.jpg");
         assertThat(result.attributes()).containsKey("timestamp");
     }
@@ -89,7 +89,7 @@ class ResourceReadBinaryTest {
                 .expectNext("two")
                 .verifyComplete();
 
-        assertThat(result.attributes()).containsEntry("componentName", "ResourceReadText");
+        assertThat(result.attributes()).containsEntry("component", "com.reedelk.core.component.ResourceReadBinary");
         assertThat(result.attributes()).containsEntry("resourcePath", "assets/css/style.css");
         assertThat(result.attributes()).containsKey("timestamp");
     }

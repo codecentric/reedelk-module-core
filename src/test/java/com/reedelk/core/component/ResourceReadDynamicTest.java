@@ -63,7 +63,7 @@ class ResourceReadDynamicTest {
         // Then
         byte[] payload = result.payload();
         assertThat(payload).isEqualTo(payloadAsBytes);
-        assertThat(result.attributes()).containsEntry("componentName", "ResourceReadDynamic");
+        assertThat(result.attributes()).containsEntry("component", "com.reedelk.core.component.ResourceReadDynamic");
         assertThat(result.attributes()).containsEntry("resourcePath", "/assets/image.jpg");
         assertThat(result.attributes()).containsKey("timestamp");
     }
@@ -92,7 +92,7 @@ class ResourceReadDynamicTest {
         // Then
         String payload = result.payload();
         assertThat(payload).isEqualTo(sampleText);
-        assertThat(result.attributes()).containsEntry("componentName", "ResourceReadDynamic");
+        assertThat(result.attributes()).containsEntry("component", "com.reedelk.core.component.ResourceReadDynamic");
         assertThat(result.attributes()).containsEntry("resourcePath", "/assets/mytext.txt");
         assertThat(result.attributes()).containsKey("timestamp");
     }

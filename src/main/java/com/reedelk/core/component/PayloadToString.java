@@ -52,15 +52,16 @@ public class PayloadToString implements ProcessorSync {
             // stream to a string.
             TypedPublisher<?> stream = content.stream();
             TypedPublisher<String> output = converterService.convert(stream, String.class);
-            return MessageBuilder.get()
+            return MessageBuilder.get(PayloadToString.class)
                     .withTypedPublisher(output, wantedMimeType)
                     .attributes(message.attributes())
                     .build();
+
         } else {
             // Content is consumed.
             Object data = content.data();
             String converted = converterService.convert(data, String.class);
-            return MessageBuilder.get()
+            return MessageBuilder.get(PayloadToString.class)
                     .withString(converted, wantedMimeType)
                     .attributes(message.attributes())
                     .build();

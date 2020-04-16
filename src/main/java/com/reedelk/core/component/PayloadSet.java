@@ -44,7 +44,7 @@ public class PayloadSet implements ProcessorSync {
 
         Object result = scriptEngine.evaluate(payload, parsedMimeType, flowContext, message).orElse(null);
 
-        return MessageBuilder.get()
+        return MessageBuilder.get(PayloadSet.class)
                 .attributes(message.attributes())
                 .withJavaObject(result, parsedMimeType)
                 .build();

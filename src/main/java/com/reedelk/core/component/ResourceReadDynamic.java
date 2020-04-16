@@ -6,7 +6,6 @@ import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.exception.PlatformException;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.message.content.TypedPublisher;
@@ -18,6 +17,8 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.reactivestreams.Publisher;
 
+import java.io.Serializable;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.reedelk.core.component.ResourceReadDynamicConfiguration.DEFAULT_READ_BUFFER_SIZE;
@@ -25,12 +26,12 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Resource Read Dynamic")
 @Description("Reads a file from the project's resources folder and sets its content into the flow message. " +
-                "The type of the message payload is byte array. The Mime Type property assign the mime type of the " +
-                "file to the message payload. If Auto Mime Type is selected, the mime type is automatically determined " +
-                "from the file extension. This component allows to specify the path and file name of the resource with " +
-                "a dynamic value instead of a static one. This component might be used to load binary data " +
-                "(e.g a picture file) from the project's resources folder in a dynamic fashion: for instance loading " +
-                "files from a given REST Listener request path's value.")
+        "The type of the message payload is byte array. The Mime Type property assign the mime type of the " +
+        "file to the message payload. If Auto Mime Type is selected, the mime type is automatically determined " +
+        "from the file extension. This component allows to specify the path and file name of the resource with " +
+        "a dynamic value instead of a static one. This component might be used to load binary data " +
+        "(e.g a picture file) from the project's resources folder in a dynamic fashion: for instance loading " +
+        "files from a given REST Listener request path's value.")
 @Component(service = ResourceReadDynamic.class, scope = PROTOTYPE)
 public class ResourceReadDynamic extends ResourceReadComponent implements ProcessorSync {
 
@@ -81,7 +82,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
 
             Publisher<byte[]> dataStream = resourceFile.data();
 
-            MessageAttributes attributes = createAttributes(ResourceReadDynamic.class, resourceFilePath);
+            Map<String, Serializable> attributes = createAttributes(resourceFilePath);
 
             MimeType actualMimeType = mimeTypeFrom(autoMimeType, mimeType, resourceFilePath, MimeType.APPLICATION_BINARY);
 
@@ -90,12 +91,12 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
                 TypedPublisher<String> streamAsString =
                         converterService.convert(TypedPublisher.fromByteArray(dataStream), String.class);
 
-                return MessageBuilder.get()
+                return MessageBuilder.get(ResourceReadDynamic.class)
                         .withString(streamAsString, actualMimeType)
                         .attributes(attributes)
                         .build();
             } else {
-                return MessageBuilder.get()
+                return MessageBuilder.get(ResourceReadDynamic.class)
                         .withBinary(dataStream, actualMimeType)
                         .attributes(attributes)
                         .build();
@@ -110,8 +111,8 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
     public void initialize() {
         readBufferSize =
                 Optional.ofNullable(configuration)
-                .flatMap(resourceReadDynamicConfiguration ->
-                        Optional.ofNullable(resourceReadDynamicConfiguration.getReadBufferSize()))
+                        .flatMap(resourceReadDynamicConfiguration ->
+                                Optional.ofNullable(resourceReadDynamicConfiguration.getReadBufferSize()))
                         .orElse(DEFAULT_READ_BUFFER_SIZE);
     }
 

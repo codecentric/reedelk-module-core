@@ -4,12 +4,14 @@ import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
-import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.resource.ResourceText;
 import org.osgi.service.component.annotations.Component;
 import org.reactivestreams.Publisher;
+
+import java.io.Serializable;
+import java.util.Map;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
@@ -54,9 +56,9 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
 
         MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath, MimeType.TEXT_PLAIN);
 
-        MessageAttributes attributes = createAttributes(ResourceReadText.class, resourceFilePath);
+        Map<String, Serializable> attributes = createAttributes(resourceFilePath);
 
-        return MessageBuilder.get()
+        return MessageBuilder.get(ResourceReadText.class)
                 .attributes(attributes)
                 .withString(data, mimeType)
                 .build();

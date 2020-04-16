@@ -39,10 +39,10 @@ public class SplitText implements ProcessorSync {
         TypedContent<?, ?> content = message.content();
 
         if (content == null) {
-            return MessageBuilder.get()
+            // Empty.
+            return MessageBuilder.get(SplitText.class)
                     .withList(new ArrayList<>(), String.class)
                     .build();
-
         }
 
         String payloadAsString = converterService.convert(content.data(), String.class);
@@ -55,16 +55,16 @@ public class SplitText implements ProcessorSync {
             segments = Arrays.asList(split);
         }
 
-        return MessageBuilder.get()
+        return MessageBuilder.get(SplitText.class)
                 .withList(segments, String.class)
                 .build();
     }
 
-    public String getDelimiter() {
-        return delimiter;
-    }
-
     public void setDelimiter(String delimiter) {
         this.delimiter = delimiter;
+    }
+
+    public String getDelimiter() {
+        return delimiter;
     }
 }

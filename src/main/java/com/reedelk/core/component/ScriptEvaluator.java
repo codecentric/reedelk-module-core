@@ -73,25 +73,25 @@ public class ScriptEvaluator implements ProcessorSync {
             return message;
 
         } else {
-            return MessageBuilder.get()
+            return MessageBuilder.get(ScriptEvaluator.class)
                     .withJavaObject(evaluated, mimeType)
                     .build();
         }
     }
 
-    public void setScript(Script script) {
-        this.script = script;
+    public void setTarget(DynamicString target) {
+        this.target = target;
     }
 
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
 
-    public DynamicString getTarget() {
-        return target;
+    public void setScript(Script script) {
+        this.script = script;
     }
 
-    public void setTarget(DynamicString target) {
-        this.target = target;
+    public DynamicString getTarget() {
+        return target;
     }
 }
