@@ -40,13 +40,13 @@ public class PayloadSet implements ProcessorSync {
     @Override
     public Message apply(FlowContext flowContext, Message message) {
 
-        MimeType mimeType = MimeType.parse(this.mimeType, MimeType.ANY);
+        MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.ANY);
 
-        Object result = scriptEngine.evaluate(payload, mimeType, flowContext, message).orElse(null);
+        Object result = scriptEngine.evaluate(payload, parsedMimeType, flowContext, message).orElse(null);
 
         return MessageBuilder.get()
                 .attributes(message.attributes())
-                .withJavaObject(result, mimeType)
+                .withJavaObject(result, parsedMimeType)
                 .build();
     }
 
