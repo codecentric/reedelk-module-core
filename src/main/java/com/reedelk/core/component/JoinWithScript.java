@@ -12,7 +12,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
@@ -44,17 +43,15 @@ public class JoinWithScript implements Join {
 
     @Override
     public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {
-        Optional<Object> result = service.evaluate(script, Object.class, flowContext, messagesToJoin);
-        if (result.isPresent()) {
-            MimeType mimeType = MimeType.parse(this.mimeType, MimeType.TEXT_PLAIN);
-            return MessageBuilder.get()
-                    .withJavaObject(result.get(), mimeType)
-                    .build();
-        } else {
-            return MessageBuilder.get()
-                    .empty()
-                    .build();
-        }
+        return service.evaluate(script, Object.class, flowContext, messagesToJoin)
+                .map(result -> {
+                    MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
+                    return MessageBuilder.get()
+                            .withJavaObject(result, parsedMimeType)
+                            .build();
+                }).orElseGet(() -> MessageBuilder.get()
+                        .empty()
+                        .build());
     }
 
     public void setScript(Script script) {
