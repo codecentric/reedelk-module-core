@@ -11,8 +11,8 @@ import com.reedelk.runtime.api.message.content.TypedContent;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
@@ -41,7 +41,7 @@ public class SplitText implements ProcessorSync {
         if (content == null) {
             // Empty.
             return MessageBuilder.get(SplitText.class)
-                    .withList(new ArrayList<>(), String.class)
+                    .withList(Collections.emptyList(), String.class)
                     .build();
         }
 
@@ -49,7 +49,7 @@ public class SplitText implements ProcessorSync {
 
         List<String> segments;
         if (StringUtils.isBlank(payloadAsString)) {
-            segments = new ArrayList<>();
+            segments = Collections.emptyList();
         } else {
             String[] split = payloadAsString.split(delimiter);
             segments = Arrays.asList(split);
