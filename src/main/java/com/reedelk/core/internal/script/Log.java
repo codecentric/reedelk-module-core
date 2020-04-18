@@ -1,5 +1,6 @@
 package com.reedelk.core.internal.script;
 
+import com.reedelk.core.component.LoggerComponent;
 import com.reedelk.core.internal.commons.LoggerLevel;
 import com.reedelk.runtime.api.annotation.AutocompleteItem;
 import com.reedelk.runtime.api.annotation.AutocompleteType;
@@ -12,7 +13,7 @@ import org.slf4j.LoggerFactory;
                 "from scripts for several logging levels.")
 public class Log {
 
-    private static final Logger logger = LoggerFactory.getLogger(Log.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoggerComponent.class);
 
     // Protected
     Log() {
