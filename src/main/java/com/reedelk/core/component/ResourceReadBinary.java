@@ -1,6 +1,7 @@
 package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.MimeTypeUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.flow.FlowContext;
@@ -61,7 +62,7 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
 
         Map<String, Serializable> attributes = createAttributes(resourceFilePath);
 
-        MimeType mimeType = mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath, MimeType.APPLICATION_BINARY);
+        MimeType mimeType = MimeTypeUtils.mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath, MimeType.APPLICATION_BINARY);
 
         // Convert the payload to a suitable type according to the mime type.
         if (String.class == mimeType.javaType()) {

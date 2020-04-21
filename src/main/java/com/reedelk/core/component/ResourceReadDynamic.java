@@ -1,6 +1,7 @@
 package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.MimeTypeUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.exception.PlatformException;
@@ -84,7 +85,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
 
             Map<String, Serializable> attributes = createAttributes(resourceFilePath);
 
-            MimeType actualMimeType = mimeTypeFrom(autoMimeType, mimeType, resourceFilePath, MimeType.APPLICATION_BINARY);
+            MimeType actualMimeType = MimeTypeUtils.mimeTypeFrom(autoMimeType, mimeType, resourceFilePath, MimeType.APPLICATION_BINARY);
 
             // Convert the payload to a suitable type according to the mime type.
             if (String.class == actualMimeType.javaType()) {
