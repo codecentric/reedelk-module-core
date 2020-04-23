@@ -55,7 +55,7 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
 
         String resourceFilePath = resourceFile.path();
 
-        MimeType mimeType = MimeTypeUtils.mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath, MimeType.TEXT_PLAIN);
+        MimeType mimeType = MimeTypeUtils.fromFileExtensionOrParse(autoMimeType, resourceFilePath, this.mimeType, MimeType.TEXT_PLAIN);
 
         Map<String, Serializable> attributes = createAttributes(resourceFilePath);
 

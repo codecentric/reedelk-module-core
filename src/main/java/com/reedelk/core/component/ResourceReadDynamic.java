@@ -85,7 +85,7 @@ public class ResourceReadDynamic extends ResourceReadComponent implements Proces
 
             Map<String, Serializable> attributes = createAttributes(resourceFilePath);
 
-            MimeType actualMimeType = MimeTypeUtils.mimeTypeFrom(autoMimeType, mimeType, resourceFilePath, MimeType.APPLICATION_BINARY);
+            MimeType actualMimeType = MimeTypeUtils.fromFileExtensionOrParse(autoMimeType, resourceFilePath, mimeType, MimeType.APPLICATION_BINARY);
 
             // Convert the payload to a suitable type according to the mime type.
             if (String.class == actualMimeType.javaType()) {

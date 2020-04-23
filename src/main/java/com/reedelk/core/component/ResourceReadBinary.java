@@ -62,7 +62,7 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
 
         Map<String, Serializable> attributes = createAttributes(resourceFilePath);
 
-        MimeType mimeType = MimeTypeUtils.mimeTypeFrom(autoMimeType, this.mimeType, resourceFilePath, MimeType.APPLICATION_BINARY);
+        MimeType mimeType = MimeTypeUtils.fromFileExtensionOrParse(autoMimeType, resourceFilePath, this.mimeType, MimeType.APPLICATION_BINARY);
 
         // Convert the payload to a suitable type according to the mime type.
         if (String.class == mimeType.javaType()) {
