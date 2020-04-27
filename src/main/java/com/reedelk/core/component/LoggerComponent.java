@@ -20,8 +20,8 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @ModuleComponent("Logger")
 @Description("This component allows to log information within a flow such as message payload, attributes, " +
                 "context variables and so on. A logger component can be added anywhere in a flow and it can log a " +
-                "simple text value or a dynamic Javascript expression. The Log Message input field type can be toggled " +
-                "to enter a static or dynamic Javascript value.")
+                "simple text value or a dynamic expression. The Log Message input field type can be toggled " +
+                "to enter a static or dynamic expression value.")
 @Component(service = LoggerComponent.class, scope = PROTOTYPE)
 public class LoggerComponent implements ProcessorSync {
 

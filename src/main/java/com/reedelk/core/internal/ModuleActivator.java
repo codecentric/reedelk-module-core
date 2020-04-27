@@ -1,6 +1,6 @@
 package com.reedelk.core.internal;
 
-import com.reedelk.core.internal.script.ScriptModules;
+import com.reedelk.core.internal.script.GlobalFunctions;
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 import com.reedelk.runtime.api.script.ScriptEngineService;
 import org.osgi.framework.BundleContext;
@@ -20,7 +20,8 @@ public class ModuleActivator {
 
     @Activate
     public void start(BundleContext context) {
-        ScriptModules scriptModules = new ScriptModules(context.getBundle().getBundleId(), configurationService);
-        scriptEngine.register(scriptModules);
+        long moduleId = context.getBundle().getBundleId();
+        GlobalFunctions globalFunctions = new GlobalFunctions(moduleId, configurationService);
+        scriptEngine.register(globalFunctions);
     }
 }

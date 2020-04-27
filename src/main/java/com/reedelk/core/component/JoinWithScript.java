@@ -17,7 +17,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Join With Script")
 @Description("Can only be placed after a Fork. It joins the payloads of the messages resulting " +
-        "from the execution of the Fork with the provided Javascript function. " +
+        "from the execution of the Fork with the provided script function. " +
         "The mime type property specifies the mime type of the joined payloads. " +
         "If the result of the script is null, an empty message payload content is set.")
 @Component(service = JoinWithScript.class, scope = PROTOTYPE)
@@ -35,7 +35,7 @@ public class JoinWithScript implements Join {
     @ScriptSignature(arguments = {"context", "messages"})
     @AutocompleteVariable(name = "context", type = FlowContext.class)
     @AutocompleteVariable(name = "messages", type = Message[].class)
-    @Description("The path of the Javascript function to be invoked when executing the component")
+    @Description("The path of the script function to be invoked when executing the component")
     private Script script;
 
     @Reference

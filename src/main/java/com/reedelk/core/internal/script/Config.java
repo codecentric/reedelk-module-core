@@ -143,6 +143,6 @@ public class Config {
         return configurationService.getBoolean(configKey, defaultValue);
     }
 
-    // Big Decimal and Big Integer are not Javascript types,
+    // Big Decimal and Big Integer are not script types,
     // therefore this service does not wrap those methods.
 }

@@ -16,13 +16,12 @@ import org.osgi.service.component.annotations.Reference;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Script")
-@Description("Executes the given Javascript function and sets the result of the " +
-        "evaluated function into the payload content. " +
-        "The Javascript function must be defined in a file with .js extension in " +
+@Description("Executes the given script function and sets the result of its evaluation in the payload content. " +
+        "The script function must be defined in a file with .groovy extension in " +
         "the project's <i>resources/scripts</i> folder. The function must have the following signature:" +
         "<br>" +
         "<br>" +
-        "<pre><code> function myFunctionName(context,message) {<br>   // Function code<br>   return 'my result';<br> }<br></code></pre>" +
+        "<pre><code> fun myFunctionName(context, message) {<br>   // Function code<br>   'my result'<br> }<br></code></pre>" +
         "<br>" +
         "The <i>context</i> variable can be used to access data stored in the flow context and the <i>message</i> variable is the current flow message object. " +
         "To access the message content from the script use <code>message.payload()</code>.")
