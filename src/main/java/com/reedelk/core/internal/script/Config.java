@@ -1,10 +1,13 @@
 package com.reedelk.core.internal.script;
 
-import com.reedelk.runtime.api.annotation.AutocompleteItem;
-import com.reedelk.runtime.api.annotation.AutocompleteType;
+import com.reedelk.runtime.api.annotation.Type;
+import com.reedelk.runtime.api.annotation.TypeFunction;
 import com.reedelk.runtime.api.configuration.ConfigurationService;
 
-@AutocompleteType(global = true, description =
+// TODO: Important! Switching to groovy there is no more constraint in having different
+//   names for different methods with different arguments. These methods and all the overloads
+//      must be made uniform: e.g: asString(String configKey) and asStringWithDefault(String configKey, String defaultValue).
+@Type(global = true, description =
         "The Config type provides a set of functions to retrieve " +
                 "configuration properties given a config key and (optionally) a default value. " +
                 "Configuration properties must be defined in the <i>{RUNTIME_HOME}/config/configuration.properties</i> file.")
@@ -19,18 +22,18 @@ public class Config {
 
     // String
 
-    @AutocompleteItem(
-            signature = "asString(configKey: string)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asString(configKey: string)",
             example = "Config.asString('endpoint.host')",
             description = "Returns the configuration value of the given config key as String type.")
     public String asString(String configKey) {
         return configurationService.getString(configKey);
     }
 
-    @AutocompleteItem(
-            signature = "asStringWithDefault(configKey: string, defaultValue: string)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asStringWithDefault(configKey: string, defaultValue: string)",
             example = "Config.asStringWithDefault('endpoint.host', 'localhost')",
             description = "Returns the configuration value of the given config key as a String type if present, " +
                     "otherwise the given default value is returned.")
@@ -40,18 +43,18 @@ public class Config {
 
     // Int
 
-    @AutocompleteItem(
-            signature = "asInt(configKey: string)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asInt(configKey: string)",
             example = "Config.asInt('endpoint.port')",
             description = "Returns the configuration value of the given config key as int type.")
     public int asInt(String configKey) {
         return configurationService.getInt(configKey);
     }
 
-    @AutocompleteItem(
-            signature = "asIntWithDefault(configKey: string, defaultValue: int)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asIntWithDefault(configKey: string, defaultValue: int)",
             example = "Config.asIntWithDefault('endpoint.port', 8282)",
             description = "Returns the configuration value of the given config key as a int type if present, " +
                     "otherwise the given default value is returned.")
@@ -61,18 +64,18 @@ public class Config {
 
     // Long
 
-    @AutocompleteItem(
-            signature = "asLong(configKey: string)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asLong(configKey: string)",
             example = "Config.asLong('my.config.property')",
             description = "Returns the configuration value of the given config key as long type.")
     public long asLong(String configKey) {
         return configurationService.getLong(configKey);
     }
 
-    @AutocompleteItem(
-            signature = "asLongWithDefault(configKey: string, defaultValue: long)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asLongWithDefault(configKey: string, defaultValue: long)",
             example = "Config.asLongWithDefault('my.config.property', 540221)",
             description = "Returns the configuration value of the given config key as a long type if present, " +
                     "otherwise the given default value is returned.")
@@ -82,18 +85,18 @@ public class Config {
 
     // Double
 
-    @AutocompleteItem(
-            signature = "asDouble(configKey: string)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asDouble(configKey: string)",
             example = "Config.asDouble('my.config.property')",
             description = "Returns the configuration value of the given config key as double type.")
     public double asDouble(String configKey) {
         return configurationService.getDouble(configKey);
     }
 
-    @AutocompleteItem(
-            signature = "asDoubleWithDefault(configKey: string, defaultValue: double)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asDoubleWithDefault(configKey: string, defaultValue: double)",
             example = "Config.asDoubleWithDefault('my.config.property', 21.7823)",
             description = "Returns the configuration value of the given config key as a double type if present, " +
                     "otherwise the given default value is returned.")
@@ -103,18 +106,18 @@ public class Config {
 
     // Float
 
-    @AutocompleteItem(
-            signature = "asFloat(configKey: string)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asFloat(configKey: string)",
             example = "Config.asFloat('my.config.property')",
             description = "Returns the configuration value of the given config key as float type.")
     public float asFloat(String configKey) {
         return configurationService.getFloat(configKey);
     }
 
-    @AutocompleteItem(
-            signature = "asFloatWithDefault(configKey: string, defaultValue: float)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asFloatWithDefault(configKey: string, defaultValue: float)",
             example = "Config.asFloatWithDefault('my.config.property', 3.1)",
             description = "Returns the configuration value of the given config key as a float type if present, " +
                     "otherwise the given default value is returned.")
@@ -124,18 +127,18 @@ public class Config {
 
     // Boolean
 
-    @AutocompleteItem(
-            signature = "asBoolean(configKey: string)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asBoolean(configKey: string)",
             example = "Config.asBoolean('my.config.property')",
             description = "Returns the configuration value of the given config key as boolean type.")
     public boolean asBoolean(String configKey) {
         return configurationService.getBoolean(configKey);
     }
 
-    @AutocompleteItem(
-            signature = "asBooleanWithDefault(configKey: string, defaultValue: boolean)",
+    @TypeFunction(
             cursorOffset = 1,
+            signature = "asBooleanWithDefault(configKey: string, defaultValue: boolean)",
             example = "Config.asBooleanWithDefault('my.config.property', true)",
             description = "Returns the configuration value of the given config key as a boolean type if present, " +
                     "otherwise the given default value is returned.")

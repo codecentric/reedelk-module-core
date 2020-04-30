@@ -33,8 +33,8 @@ public class JoinWithScript implements Join {
     @Property("Script")
     @Example("joiners/joinByType.js")
     @ScriptSignature(arguments = {"context", "messages"})
-    @AutocompleteVariable(name = "context", type = FlowContext.class)
-    @AutocompleteVariable(name = "messages", type = Message[].class)
+    @ScriptVariable(name = "context", type = FlowContext.class)
+    @ScriptVariable(name = "messages", type = Message[].class)
     @Description("The path of the script function to be invoked when executing the component")
     private Script script;
 
@@ -43,15 +43,12 @@ public class JoinWithScript implements Join {
 
     @Override
     public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {
-        return service
-                .evaluate(script, Object.class, flowContext, messagesToJoin)
-                .map(result -> {
-                    MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
-                    return MessageBuilder.get(JoinWithScript.class)
-                            .withJavaObject(result, parsedMimeType)
-                            .build();
-
-                }).orElseGet(() -> MessageBuilder.get(JoinWithScript.class).empty().build());
+        return service.evaluate(script, Object.class, flowContext, messagesToJoin).map(result -> {
+            MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
+            return MessageBuilder.get(JoinWithScript.class)
+                    .withJavaObject(result, parsedMimeType)
+                    .build();
+        }).orElseGet(() -> MessageBuilder.get(JoinWithScript.class).empty().build());
     }
 
     public void setScript(Script script) {
@@ -61,5 +58,4 @@ public class JoinWithScript implements Join {
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
-
 }

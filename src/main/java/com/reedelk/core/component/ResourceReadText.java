@@ -1,18 +1,17 @@
 package com.reedelk.core.component;
 
+import com.reedelk.core.internal.attribute.ResourceReadAttributes;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.commons.MimeTypeUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
+import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.resource.ResourceText;
 import org.osgi.service.component.annotations.Component;
 import org.reactivestreams.Publisher;
-
-import java.io.Serializable;
-import java.util.Map;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
@@ -23,7 +22,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
                 "message payload. If Auto Mime Type is selected, the mime type is automatically determined from " +
                 "the file extension.")
 @Component(service = ResourceReadText.class, scope = PROTOTYPE)
-public class ResourceReadText extends ResourceReadComponent implements ProcessorSync {
+public class ResourceReadText implements ProcessorSync {
 
     @Property("Resource file")
     @Hint("assets/sample.txt")
@@ -57,7 +56,7 @@ public class ResourceReadText extends ResourceReadComponent implements Processor
 
         MimeType mimeType = MimeTypeUtils.fromFileExtensionOrParse(autoMimeType, resourceFilePath, this.mimeType, MimeType.TEXT_PLAIN);
 
-        Map<String, Serializable> attributes = createAttributes(resourceFilePath);
+        MessageAttributes attributes = new ResourceReadAttributes(resourceFilePath);
 
         return MessageBuilder.get(ResourceReadText.class)
                 .attributes(attributes)

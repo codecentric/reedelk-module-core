@@ -1,11 +1,13 @@
 package com.reedelk.core.component;
 
+import com.reedelk.core.internal.attribute.ResourceReadAttributes;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.commons.MimeTypeUtils;
 import com.reedelk.runtime.api.component.ProcessorSync;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
+import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.message.content.TypedPublisher;
@@ -13,9 +15,6 @@ import com.reedelk.runtime.api.resource.ResourceBinary;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.reactivestreams.Publisher;
-
-import java.io.Serializable;
-import java.util.Map;
 
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
@@ -26,7 +25,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
                 "mime type of the file to the message payload. If Auto Mime Type is selected, the mime type is " +
                 "automatically determined from the file extension.")
 @Component(service = ResourceReadBinary.class, scope = PROTOTYPE)
-public class ResourceReadBinary extends ResourceReadComponent implements ProcessorSync {
+public class ResourceReadBinary implements ProcessorSync {
 
     @Property("Resource file")
     @Example("assets/my_image.jpg")
@@ -60,7 +59,7 @@ public class ResourceReadBinary extends ResourceReadComponent implements Process
 
         String resourceFilePath = resourceFile.path();
 
-        Map<String, Serializable> attributes = createAttributes(resourceFilePath);
+        MessageAttributes attributes = new ResourceReadAttributes(resourceFilePath);
 
         MimeType mimeType = MimeTypeUtils.fromFileExtensionOrParse(autoMimeType, resourceFilePath, this.mimeType, MimeType.APPLICATION_BINARY);
 
