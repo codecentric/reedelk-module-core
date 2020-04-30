@@ -32,9 +32,7 @@ public class JoinWithScript implements Join {
 
     @Property("Script")
     @Example("joiners/joinByType.js")
-    @ScriptSignature(arguments = {"context", "messages"})
-    @ScriptVariable(name = "context", type = FlowContext.class)
-    @ScriptVariable(name = "messages", type = Message[].class)
+    @ScriptSignature(arguments = {"context", "messages"}, types= {FlowContext.class, Message[].class})
     @Description("The path of the script function to be invoked when executing the component")
     private Script script;
 
