@@ -5,7 +5,6 @@ import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.message.content.TypedContent;
-import com.reedelk.runtime.api.message.content.TypedPublisher;
 import com.reedelk.runtime.api.resource.ResourceBinary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ import reactor.test.StepVerifier;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class ResourceReadBinaryTest {
@@ -63,34 +62,6 @@ class ResourceReadBinaryTest {
 
         assertThat(result.attributes()).containsEntry("component", "com.reedelk.core.component.ResourceReadBinary");
         assertThat(result.attributes()).containsEntry("resourcePath", "assets/img/donkey.jpg");
-        assertThat(result.attributes()).containsKey("timestamp");
-    }
-
-    @Test
-    void shouldConvertContentWhenTextPlainMimeType() {
-        // Given
-        Flux<byte[]> byteStream = Flux.just("one".getBytes(), "two".getBytes());
-        ResourceBinary resourceBinary = new TestResourceBinary("assets/css/style.css", byteStream);
-        component.setMimeType(MimeType.AsString.TEXT_PLAIN);
-        component.setAutoMimeType(true);
-        component.setResourceFile(resourceBinary);
-
-        TypedPublisher<String> convertedStream = TypedPublisher.fromString(Flux.just("one", "two"));
-        doReturn(convertedStream)
-                .when(converterService)
-                .convert(any(TypedPublisher.class), eq(String.class));
-
-        // When
-        Message result = component.apply(context, message);
-
-        // Then
-        StepVerifier.create(result.content().stream())
-                .expectNext("one")
-                .expectNext("two")
-                .verifyComplete();
-
-        assertThat(result.attributes()).containsEntry("component", "com.reedelk.core.component.ResourceReadBinary");
-        assertThat(result.attributes()).containsEntry("resourcePath", "assets/css/style.css");
         assertThat(result.attributes()).containsKey("timestamp");
     }
 
