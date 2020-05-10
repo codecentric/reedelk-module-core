@@ -14,6 +14,10 @@ import org.osgi.service.component.annotations.Reference;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Payload Set")
+@ComponentOutput(
+        attributes = ComponentOutput.PreviousComponent.class,
+        payload = Object.class, // TODO: This is a problem if we set nothing!!! the analyzer throws null pointer?!?
+        description = "Sets the new message payload by evaluating the expression. The attributes are not changed.")
 @Description("Sets the content of the current message payload to the given payload value. " +
                 "The payload value could be a static text value or a dynamic expression. The mime type specifies " +
                 "the type of the new payload value.")
