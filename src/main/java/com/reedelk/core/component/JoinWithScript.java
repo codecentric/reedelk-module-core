@@ -1,5 +1,6 @@
 package com.reedelk.core.component;
 
+import com.reedelk.core.internal.type.ListOfMessages;
 import com.reedelk.runtime.api.annotation.*;
 import com.reedelk.runtime.api.component.Join;
 import com.reedelk.runtime.api.flow.FlowContext;
@@ -31,8 +32,8 @@ public class JoinWithScript implements Join {
     private String mimeType;
 
     @Property("Script")
-    @Example("joiners/joinByType.js")
-    @ScriptSignature(arguments = {"context", "messages"}, types= {FlowContext.class, Message[].class})
+    @Example("joiners/joinByType.groovy")
+    @ScriptSignature(arguments = {"context", "messages"}, types= {FlowContext.class, ListOfMessages.class})
     @Description("The path of the script function to be invoked when executing the component")
     private Script script;
 
