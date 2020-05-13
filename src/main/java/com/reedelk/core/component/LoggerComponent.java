@@ -18,6 +18,9 @@ import javax.script.ScriptException;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Logger")
+@ComponentOutput(
+        attributes = ComponentOutput.PreviousComponent.class,
+        payload = ComponentOutput.PreviousComponent.class)
 @Description("This component allows to log information within a flow such as message payload, attributes, " +
                 "context variables and so on. A logger component can be added anywhere in a flow and it can log a " +
                 "simple text value or a dynamic expression. The Log Message input field type can be toggled " +
