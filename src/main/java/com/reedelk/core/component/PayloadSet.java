@@ -16,7 +16,8 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @ModuleComponent("Payload Set")
 @ComponentOutput(
         attributes = ComponentOutput.PreviousComponent.class,
-        payload = Object.class, // TODO: This is a problem if we set nothing!!! the analyzer throws null pointer?!?
+        payload = ComponentOutput.InferFromDynamicProperty.class, // TODO: This is a problem if we set nothing!!! the analyzer throws null pointer?!?
+        dynamicPropertyName = "payload",
         description = "Sets the new message payload by evaluating the expression. The attributes are not changed.")
 @Description("Sets the content of the current message payload to the given payload value. " +
                 "The payload value could be a static text value or a dynamic expression. The mime type specifies " +
@@ -44,6 +45,7 @@ public class PayloadSet implements ProcessorSync {
     @Override
     public Message apply(FlowContext flowContext, Message message) {
 
+        // TODO: if the payload is empty, then just return the input body as 'is'
         MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.ANY);
 
         Object result = scriptEngine.evaluate(payload, parsedMimeType, flowContext, message).orElse(null);
