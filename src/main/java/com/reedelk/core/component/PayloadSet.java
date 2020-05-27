@@ -48,14 +48,13 @@ public class PayloadSet implements ProcessorSync {
     @Override
     public Message apply(FlowContext flowContext, Message message) {
 
-        // TODO: if the payload is empty, then just return the input body as 'is'
         MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.ANY);
 
         Object result = scriptEngine.evaluate(payload, parsedMimeType, flowContext, message).orElse(null);
 
         return MessageBuilder.get(PayloadSet.class)
-                .attributes(message.attributes())
                 .withJavaObject(result, parsedMimeType)
+                .attributes(message.attributes())
                 .build();
     }
 
