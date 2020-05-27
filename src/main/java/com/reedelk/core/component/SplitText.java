@@ -59,7 +59,7 @@ public class SplitText implements ProcessorSync {
 
         List<String> segments;
         if (isBlank(payloadAsString)) {
-            segments = Collections.emptyList();
+            segments = new ListOfString();
         } else {
             String[] split = payloadAsString.split(delimiter);
             segments = Arrays.asList(split);
