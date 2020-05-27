@@ -1,10 +1,12 @@
 package com.reedelk.core.component;
 
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.AttributesUtils;
 import com.reedelk.runtime.api.component.Join;
 import com.reedelk.runtime.api.converter.ConverterService;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
+import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import org.osgi.service.component.annotations.Component;
@@ -16,6 +18,14 @@ import static java.util.stream.Collectors.joining;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Join With Delimiter")
+@ComponentInput(
+        payload = Message[].class,
+        description = "The messages to join using the given delimiter")
+@ComponentOutput(
+        attributes = ComponentOutput.PreviousComponent.class,
+        payload = String.class,
+        description = "The joined content of the input messages payloads using the delimiter as separator. " +
+                "If a message does not have a payload of type string, it is converted to string before joining.")
 @Description("Can only be placed after a Fork. It joins the payloads of the messages resulting " +
         "from the execution of the Fork with the provided delimiter. " +
         "A delimiter can be a single character or any other string. " +
@@ -53,8 +63,11 @@ public class JoinWithDelimiter implements Join {
 
         MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
 
+        MessageAttributes mergedAttributes = AttributesUtils.merge(messagesToJoin);
+
         return MessageBuilder.get(JoinWithDelimiter.class)
                 .withString(combinedPayload, parsedMimeType)
+                .attributes(mergedAttributes)
                 .build();
     }
 

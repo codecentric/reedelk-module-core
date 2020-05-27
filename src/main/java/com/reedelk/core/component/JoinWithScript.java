@@ -2,9 +2,11 @@ package com.reedelk.core.component;
 
 import com.reedelk.core.internal.type.ListOfMessages;
 import com.reedelk.runtime.api.annotation.*;
+import com.reedelk.runtime.api.commons.AttributesUtils;
 import com.reedelk.runtime.api.component.Join;
 import com.reedelk.runtime.api.flow.FlowContext;
 import com.reedelk.runtime.api.message.Message;
+import com.reedelk.runtime.api.message.MessageAttributes;
 import com.reedelk.runtime.api.message.MessageBuilder;
 import com.reedelk.runtime.api.message.content.MimeType;
 import com.reedelk.runtime.api.script.Script;
@@ -17,6 +19,13 @@ import java.util.List;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Join With Script")
+@ComponentInput(
+        payload = Message[].class,
+        description = "The messages to join using the given script")
+@ComponentOutput(
+        attributes = ComponentOutput.PreviousComponent.class,
+        payload = Object.class,
+        description = "The joined content of the input messages payloads using by evaluating the given script.")
 @Description("Can only be placed after a Fork. It joins the payloads of the messages resulting " +
         "from the execution of the Fork with the provided script function. " +
         "The mime type property specifies the mime type of the joined payloads. " +
@@ -33,7 +42,7 @@ public class JoinWithScript implements Join {
 
     @Property("Script")
     @Example("joiners/joinByType.groovy")
-    @ScriptSignature(arguments = {"context", "messages"}, types= {FlowContext.class, ListOfMessages.class})
+    @ScriptSignature(arguments = {"context", "messages"}, types = {FlowContext.class, ListOfMessages.class})
     @Description("The path of the script function to be invoked when executing the component")
     private Script script;
 
@@ -42,12 +51,22 @@ public class JoinWithScript implements Join {
 
     @Override
     public Message apply(FlowContext flowContext, List<Message> messagesToJoin) {
-        return service.evaluate(script, Object.class, flowContext, messagesToJoin).map(result -> {
-            MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
-            return MessageBuilder.get(JoinWithScript.class)
-                    .withJavaObject(result, parsedMimeType)
-                    .build();
-        }).orElseGet(() -> MessageBuilder.get(JoinWithScript.class).empty().build());
+        MessageAttributes mergedAttributes = AttributesUtils.merge(messagesToJoin);
+
+        return service
+                .evaluate(script, Object.class, flowContext, messagesToJoin)
+                .map(result -> {
+                    MimeType parsedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
+                    return MessageBuilder.get(JoinWithScript.class)
+                            .withJavaObject(result, parsedMimeType)
+                            .attributes(mergedAttributes)
+                            .build();
+
+                }).orElseGet(() ->
+                        MessageBuilder.get(JoinWithScript.class)
+                                .attributes(mergedAttributes)
+                                .empty()
+                                .build());
     }
 
     public void setScript(Script script) {
