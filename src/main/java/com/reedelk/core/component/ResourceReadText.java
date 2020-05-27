@@ -16,6 +16,14 @@ import org.reactivestreams.Publisher;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Resource Read Text")
+@ComponentInput(
+        payload = Object.class,
+        description = "The input payload is not used by this component. " +
+                "The resource is read from the given Resource File path property.")
+@ComponentOutput(
+        attributes = ResourceReadAttributes.class,
+        payload = String.class,
+        description = "The content of the resource file read from the project's resources folder.")
 @Description("Reads a file from the project's resources folder and sets its content into the flow message. " +
                 "The type of the message payload is string. This component might be used to load text files (e.g .txt, .json, .xml) " +
                 "from the project's resources folder. The Mime Type property assign the mime type of the file to the " +

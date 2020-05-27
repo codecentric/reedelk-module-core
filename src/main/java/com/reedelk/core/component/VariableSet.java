@@ -14,6 +14,13 @@ import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuratio
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Variable Set")
+@ComponentOutput(
+        attributes = ComponentOutput.PreviousComponent.class,
+        payload = ComponentOutput.PreviousComponent.class)
+@ComponentInput(
+        payload = Object.class,
+        description = "Any input. The input message is used to evaluate the dynamic expression whose result is assigned " +
+                "to the context variable with the given name.")
 @Description("Sets a variable in the flow context with the provided value.")
 @Component(service = VariableSet.class, scope = PROTOTYPE)
 public class VariableSet implements ProcessorSync {

@@ -26,6 +26,15 @@ import static com.reedelk.core.component.ResourceReadDynamicConfiguration.DEFAUL
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Resource Read Dynamic")
+@ComponentInput(
+        payload = Object.class,
+        description = "The input payload is not used by this component. " +
+                "The resource is read from the given Resource File path property.")
+@ComponentOutput(
+        attributes = ResourceReadAttributes.class,
+        payload = { byte[].class, String.class },
+        description = "The content of the resource file read from the project's resources folder. " +
+                "The output is string if the mime type is a string based type e.g text/plain, otherwise a byte array.")
 @Description("Reads a file from the project's resources folder and sets its content into the flow message. " +
         "The type of the message payload is byte array. The Mime Type property assign the mime type of the " +
         "file to the message payload. If Auto Mime Type is selected, the mime type is automatically determined " +

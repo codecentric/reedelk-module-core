@@ -16,6 +16,13 @@ import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuratio
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Payload To String")
+@ComponentOutput(
+        attributes = ComponentOutput.PreviousComponent.class,
+        payload = String.class,
+        description = "Converts the payload to a string")
+@ComponentInput(
+        payload = Object.class,
+        description = "Any payload input to be converted to a string")
 @Description("Transforms the message payload to string type. This component can be used when the payload " +
                 "is a byte array or a byte array stream and we want to convert it to a string for further processing. " +
                 "This might be necessary for instance when the result of a REST Call does not have a mime type assigned. " +

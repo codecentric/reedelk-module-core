@@ -10,6 +10,12 @@ import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuratio
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Variable Remove")
+@ComponentOutput(
+        attributes = ComponentOutput.PreviousComponent.class,
+        payload = ComponentOutput.PreviousComponent.class)
+@ComponentInput(
+        payload = Object.class,
+        description = "Any input. The input message is not used by this component.")
 @Description("Removes a variable previously set in the flow context.")
 @Component(service = VariableRemove.class, scope = PROTOTYPE)
 public class VariableRemove implements ProcessorSync {

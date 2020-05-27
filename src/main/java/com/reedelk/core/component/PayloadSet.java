@@ -16,9 +16,12 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @ModuleComponent("Payload Set")
 @ComponentOutput(
         attributes = ComponentOutput.PreviousComponent.class,
-        payload = ComponentOutput.InferFromDynamicProperty.class, // TODO: This is a problem if we set nothing!!! the analyzer throws null pointer?!?
+        payload = ComponentOutput.InferFromDynamicProperty.class,
         dynamicPropertyName = "payload",
         description = "Sets the new message payload by evaluating the expression. The attributes are not changed.")
+@ComponentInput(
+        payload = Object.class,
+        description = "Any payload input to be evaluated")
 @Description("Sets the content of the current message payload to the given payload value. " +
                 "The payload value could be a static text value or a dynamic expression. The mime type specifies " +
                 "the type of the new payload value.")

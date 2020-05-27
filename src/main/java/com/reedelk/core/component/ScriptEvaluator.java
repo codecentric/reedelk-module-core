@@ -16,6 +16,13 @@ import org.osgi.service.component.annotations.Reference;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Script")
+@ComponentInput(
+        payload = Object.class,
+        description = "The message to be evaluated by this script")
+@ComponentOutput(
+        attributes = ComponentOutput.PreviousComponent.class,
+        payload = Object.class,
+        description = "The result of the evaluated script")
 @Description("Executes the given script function and sets the result of its evaluation in the payload content. " +
         "The script function must be defined in a file with .groovy extension in " +
         "the project's <i>resources/scripts</i> folder. The function must have the following signature:" +
@@ -40,7 +47,7 @@ public class ScriptEvaluator implements ProcessorSync {
     private String mimeType;
 
     @Property("Script")
-    @Example("mapJsonModel.js")
+    @Example("mapJsonModel.groovy")
     @Description("Sets the script file to be executed by this component. " +
             "Must be a file path and name starting from the project's resources/scripts directory.")
     private Script script;
@@ -67,13 +74,13 @@ public class ScriptEvaluator implements ProcessorSync {
         // the result of the Script evaluation and we return the original message.
         if (DynamicValueUtils.isNotNullOrBlank(target)) {
             service.evaluate(target, flowContext, message)
-                    .ifPresent(contextVariableName ->
-                            flowContext.put(contextVariableName, evaluated));
+                    .ifPresent(contextVariableName -> flowContext.put(contextVariableName, evaluated));
             return message;
 
         } else {
             return MessageBuilder.get(ScriptEvaluator.class)
                     .withJavaObject(evaluated, mimeType)
+                    .attributes(message.attributes())
                     .build();
         }
     }

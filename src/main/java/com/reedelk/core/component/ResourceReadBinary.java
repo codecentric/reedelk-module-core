@@ -18,9 +18,14 @@ import org.reactivestreams.Publisher;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Resource Read Binary")
-// TODO: Any input is accepted, create a class for that. (Input is not used) create a class for not used input.
-@ComponentInput(payload = {Void.class}, description = "The resource content")
-@ComponentOutput(attributes = ResourceReadAttributes.class, payload = byte[].class, description = "The content of the resource file read from the project's resources folder.")
+@ComponentInput(
+        payload = Object.class,
+        description = "The input payload is not used by this component. " +
+                "The resource is read from the given Resource File path property.")
+@ComponentOutput(
+        attributes = ResourceReadAttributes.class,
+        payload = byte[].class,
+        description = "The content of the resource file read from the project's resources folder.")
 @Description("Reads a file from the project's resources folder and sets its content into the flow message. " +
                 "The type of the message payload is byte array. This component might be used to load binary " +
                 "data (e.g a picture file) from the project's resources folder. The Mime Type property assign the " +
