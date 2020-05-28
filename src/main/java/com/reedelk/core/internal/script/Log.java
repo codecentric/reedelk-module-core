@@ -21,7 +21,7 @@ public class Log {
 
     @TypeFunction(
             cursorOffset = 1,
-            signature = "info(message: Object)",
+            signature = "info(Object message)",
             example = "Log.info('my info log message')",
             description = "Logs a message with INFO logger level.")
     public void info(Object message) {
@@ -30,7 +30,7 @@ public class Log {
 
     @TypeFunction(
             cursorOffset = 1,
-            signature = "warn(message: Object)",
+            signature = "warn(Object message)",
             example = "Log.warn('my warn log message')",
             description = "Logs a message with WARN logger level.")
     public void warn(Object message) {
@@ -39,7 +39,7 @@ public class Log {
 
     @TypeFunction(
             cursorOffset = 1,
-            signature = "error(message: Object)",
+            signature = "error(Object message)",
             example = "Log.error('my error log message')",
             description = "Logs a message with ERROR logger level.")
     public void error(Object message) {
@@ -48,7 +48,7 @@ public class Log {
 
     @TypeFunction(
             cursorOffset = 1,
-            signature = "trace(message: Object)",
+            signature = "trace(Object message)",
             example = "Log.trace('my trace log message')",
             description = "Logs a message with TRACE logger level.")
     public void trace(Object message) {
@@ -57,7 +57,7 @@ public class Log {
 
     @TypeFunction(
             cursorOffset = 1,
-            signature = "debug(message: Object)",
+            signature = "debug(Object message)",
             example = "Log.debug('my debug log message')",
             description = "Logs a message with DEBUG logger level.")
     public void debug(Object message) {
