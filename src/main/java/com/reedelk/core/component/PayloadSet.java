@@ -38,7 +38,7 @@ public class PayloadSet implements ProcessorSync {
     @Property("Payload")
     @Hint("Payload text")
     @InitValue("#[message.payload()]")
-    @Example("<code>JSON.stringify({ data: message.payload(), id: Util.uuid() }</code>")
+    @Example("<code>Json.stringify([ data: message.payload(), id: Util.uuid() ])</code>")
     @Description("The new payload to be set to the current flow message.")
     private DynamicObject payload;
 
