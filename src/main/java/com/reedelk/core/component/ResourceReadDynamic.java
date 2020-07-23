@@ -23,6 +23,7 @@ import org.reactivestreams.Publisher;
 import java.util.Optional;
 
 import static com.reedelk.core.component.ResourceReadDynamicConfiguration.DEFAULT_READ_BUFFER_SIZE;
+import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuration.requireNotNullOrBlank;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Resource Read Dynamic")
@@ -45,6 +46,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = ResourceReadDynamic.class, scope = PROTOTYPE)
 public class ResourceReadDynamic implements ProcessorSync {
 
+    @Mandatory
     @Property("Resource file")
     @Hint("/assets/sample.jpg")
     @InitValue("#['/assets/sample.jpg']")
@@ -82,6 +84,16 @@ public class ResourceReadDynamic implements ProcessorSync {
     private int readBufferSize;
 
     @Override
+    public void initialize() {
+        requireNotNullOrBlank(ResourceReadDynamic.class, resourceFile, "resource file expression must not be null or empty");
+        readBufferSize =
+                Optional.ofNullable(configuration)
+                        .flatMap(resourceReadDynamicConfiguration ->
+                                Optional.ofNullable(resourceReadDynamicConfiguration.getReadBufferSize()))
+                        .orElse(DEFAULT_READ_BUFFER_SIZE);
+    }
+
+    @Override
     public Message apply(FlowContext flowContext, Message message) {
 
         try {
@@ -115,15 +127,6 @@ public class ResourceReadDynamic implements ProcessorSync {
         } catch (ResourceNotFound resourceNotFound) {
             throw new PlatformException(resourceNotFound);
         }
-    }
-
-    @Override
-    public void initialize() {
-        readBufferSize =
-                Optional.ofNullable(configuration)
-                        .flatMap(resourceReadDynamicConfiguration ->
-                                Optional.ofNullable(resourceReadDynamicConfiguration.getReadBufferSize()))
-                        .orElse(DEFAULT_READ_BUFFER_SIZE);
     }
 
     public void setResourceFile(DynamicResource resourceFile) {

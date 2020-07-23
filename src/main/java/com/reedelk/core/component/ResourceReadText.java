@@ -13,6 +13,7 @@ import com.reedelk.runtime.api.resource.ResourceText;
 import org.osgi.service.component.annotations.Component;
 import org.reactivestreams.Publisher;
 
+import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuration.requireNotNull;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Resource Read Text")
@@ -32,6 +33,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = ResourceReadText.class, scope = PROTOTYPE)
 public class ResourceReadText implements ProcessorSync {
 
+    @Mandatory
     @Property("Resource file")
     @Hint("assets/sample.txt")
     @Example("assets/data_model.json")
@@ -54,6 +56,11 @@ public class ResourceReadText implements ProcessorSync {
     @When(propertyName = "autoMimeType", propertyValue = When.BLANK)
     @Description("The mime type of the resource read from local project's resources directory.")
     private String mimeType;
+
+    @Override
+    public void initialize() {
+        requireNotNull(ResourceReadText.class, resourceFile, "resource file must be set");
+    }
 
     @Override
     public Message apply(FlowContext flowContext, Message message) {

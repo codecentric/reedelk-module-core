@@ -15,6 +15,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.reactivestreams.Publisher;
 
+import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuration.requireNotNull;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Resource Read Binary")
@@ -34,6 +35,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @Component(service = ResourceReadBinary.class, scope = PROTOTYPE)
 public class ResourceReadBinary implements ProcessorSync {
 
+    @Mandatory
     @Property("Resource file")
     @Example("assets/my_image.jpg")
     @HintBrowseFile("Select Resource Binary File ...")
@@ -58,6 +60,11 @@ public class ResourceReadBinary implements ProcessorSync {
 
     @Reference
     ConverterService converterService;
+
+    @Override
+    public void initialize() {
+        requireNotNull(ResourceReadBinary.class, resourceFile, "resource file must be set");
+    }
 
     @Override
     public Message apply(FlowContext flowContext, Message message) {
