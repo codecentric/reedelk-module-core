@@ -43,7 +43,7 @@ class ResourceReadDynamicTest {
         component = new ResourceReadDynamic();
         component.resourceService = resourceService;
         component.converterService = converterService;
-        dynamicResource = spy(DynamicResource.from("#['assets/' + message.payload()]", new ModuleContext(10L)));
+        dynamicResource = spy(DynamicResource.from("#['assets/' + message.payload()]", moduleContext));
     }
 
     @Test
