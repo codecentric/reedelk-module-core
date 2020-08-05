@@ -33,7 +33,7 @@ class ResourceReadDynamicTest {
     private ResourceService resourceService;
     @Mock
     private ConverterService converterService;
-    @Mock
+
     private DynamicResource dynamicResource;
 
     private ResourceReadDynamic component;
@@ -43,6 +43,7 @@ class ResourceReadDynamicTest {
         component = new ResourceReadDynamic();
         component.resourceService = resourceService;
         component.converterService = converterService;
+        dynamicResource = spy(DynamicResource.from("#['assets/' + message.payload()]", new ModuleContext(10L)));
     }
 
     @Test
