@@ -12,7 +12,6 @@ import com.reedelk.runtime.api.message.content.TypedPublisher;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import static com.reedelk.runtime.api.commons.ComponentPrecondition.Configuration.requireNotBlank;
 import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 
 @ModuleComponent("Payload To String")
@@ -45,7 +44,6 @@ public class PayloadToString implements ProcessorSync {
 
     @Override
     public void initialize() {
-        requireNotBlank(PayloadToString.class, mimeType, "MimeType must not be empty");
         this.wantedMimeType = MimeType.parse(mimeType, MimeType.TEXT_PLAIN);
     }
 
