@@ -18,7 +18,7 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
 @ModuleComponent("Script")
 @ComponentInput(
         payload = Object.class,
-        description = "The message to be evaluated by this script")
+        description = "The message data to be evaluated by this script")
 @ComponentOutput(
         attributes = ComponentOutput.PreviousComponent.class,
         payload = Object.class,

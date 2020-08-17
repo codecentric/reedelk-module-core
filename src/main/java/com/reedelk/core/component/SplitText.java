@@ -24,9 +24,9 @@ import static org.osgi.service.component.annotations.ServiceScope.PROTOTYPE;
         payload = ListOfString.class,
         description = "A list containing the segments of the input payload split using the delimiter.")
 @ComponentInput(
-        payload = Object.class,
-        description = "Any payload input to be split using the delimiter. " +
-                "If the input is not a string, it is first converted to string.")
+        payload = String.class,
+        description = "Any payload input string to be split using the delimiter. " +
+                "If the input is not a string, it is first converted to string using the default system charset.")
 @Description("The Split Text component splits the text from the " +
         "Message payload using the provided delimiter or regular expression. " +
         "A collection containing all the strings computed by splitting the message payload with the delimiter.")
