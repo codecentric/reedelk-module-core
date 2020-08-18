@@ -1,7 +1,7 @@
 [
   {
     "version": "1.0.1",
-    "date": "//TODO: Add date",
+    "date": "18/8/2020",
     "release-notes": "<ul><li>Bugfix: Added @Mandatory annotations and configuration preconditions check on input files/expressions for ResourceReadXYZ components.</li><ul>"
   },
   {
