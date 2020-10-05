@@ -11,10 +11,11 @@
     </parent>
 
     <packaging>bundle</packaging>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
     <artifactId>module-core</artifactId> <!-- NAME_CONVENTION -->
 
     <properties>
+        <bcrypt.version>0.4</bcrypt.version>
         <maven.compiler.release>8</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <assertj.version>3.11.1</assertj.version>
@@ -25,6 +26,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>${bcrypt.version}</version>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.assertj</groupId>

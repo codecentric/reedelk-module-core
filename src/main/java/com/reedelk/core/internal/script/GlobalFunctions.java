@@ -13,12 +13,14 @@ public class GlobalFunctions implements ScriptGlobalFunctions {
     private final Log log;
     private final Util util;
     private final Config config;
+    private final BCryptUtil bCryptUtil;
 
     public GlobalFunctions(long moduleId, ConfigurationService configurationService) {
         this.moduleId = moduleId;
         this.log = new Log();
         this.util = new Util();
         this.config = new Config(configurationService);
+        this.bCryptUtil = new BCryptUtil();
     }
 
     @Override
@@ -32,6 +34,7 @@ public class GlobalFunctions implements ScriptGlobalFunctions {
         bindings.put("Log", log);       // binding key are names of the global variables.
         bindings.put("Util", util);     // binding key are names of the global variables.
         bindings.put("Config", config); // binding key are names of the global variables.
+        bindings.put("BCryptUtil", bCryptUtil); // binding key are names of the global variables.
         return bindings;
     }
 }
