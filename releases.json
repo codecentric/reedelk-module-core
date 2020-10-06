@@ -1,7 +1,7 @@
 [
   {
     "version": "1.0.6",
-    "date": "//TODO",
+    "date": "6/10/2020",
     "release-notes": "<ul><li>Added BCryptUtil functions to hash and check passwords using BCrypt schemes.</li><ul>"
   },
   {
