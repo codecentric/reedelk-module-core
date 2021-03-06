@@ -1,0 +1,68 @@
+package de.codecentric.reedelk.core.internal.script;
+
+import de.codecentric.reedelk.core.component.LoggerComponent;
+import de.codecentric.reedelk.core.internal.commons.LoggerLevel;
+import de.codecentric.reedelk.runtime.api.annotation.Type;
+import de.codecentric.reedelk.runtime.api.annotation.TypeFunction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+@Type(global = true, description =
+        "The Log type provides a set of functions to log messages " +
+                "from scripts for several logging levels.")
+public class Log {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoggerComponent.class);
+
+    // Protected
+    Log() {
+    }
+
+    @TypeFunction(
+            cursorOffset = 1,
+            signature = "info(Object message)",
+            example = "Log.info('my info log message')",
+            description = "Logs a message with INFO logger level.")
+    public void info(Object message) {
+        LoggerLevel.INFO.log(logger, message);
+    }
+
+    @TypeFunction(
+            cursorOffset = 1,
+            signature = "warn(Object message)",
+            example = "Log.warn('my warn log message')",
+            description = "Logs a message with WARN logger level.")
+    public void warn(Object message) {
+        LoggerLevel.WARN.log(logger, message);
+    }
+
+    @TypeFunction(
+            cursorOffset = 1,
+            signature = "error(Object message)",
+            example = "Log.error('my error log message')",
+            description = "Logs a message with ERROR logger level.")
+    public void error(Object message) {
+        LoggerLevel.ERROR.log(logger, message);
+    }
+
+    @TypeFunction(
+            cursorOffset = 1,
+            signature = "trace(Object message)",
+            example = "Log.trace('my trace log message')",
+            description = "Logs a message with TRACE logger level.")
+    public void trace(Object message) {
+        LoggerLevel.TRACE.log(logger, message);
+    }
+
+    @TypeFunction(
+            cursorOffset = 1,
+            signature = "debug(Object message)",
+            example = "Log.debug('my debug log message')",
+            description = "Logs a message with DEBUG logger level.")
+    public void debug(Object message) {
+        if (logger.isDebugEnabled()) {
+            LoggerLevel.DEBUG.log(logger, message);
+        }
+    }
+}
