@@ -12,10 +12,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           server-id: github
-          server-username: GITHUB_USER_REF
-          server-password: GITHUB_TOKEN_REF
+          server-username: ${{ secrets.GH_PACKAGE_REPO_USERNAME }}
+          server-password: ${{ secrets.GH_PACKAGE_REPO_PASSWORD }}
       - name: Publish package
         run: mvn --batch-mode deploy -DskipTests
         env:
-          GITHUB_USER_REF: ${{ secrets.GH_PACKAGE_REPO_USERNAME }}
-          GITHUB_TOKEN_REF: ${{ secrets.GH_PACKAGE_REPO_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
